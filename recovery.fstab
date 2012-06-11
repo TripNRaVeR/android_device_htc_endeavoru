@@ -1,0 +1,14 @@
+# mount point	fstype		device
+
+/recovery       emmc            /dev/block/mmcblk0p5
+/boot           emmc            /dev/block/mmcblk0p4
+/system         ext4            /dev/block/mmcblk0p12
+/cache          ext4            /dev/block/mmcblk0p13
+/misc           emmc            /dev/block/mmcblk0p17
+/wlan           emmc            /dev/block/mmcblk0p1
+/wdm            emmc            /dev/block/mmcblk0p2
+/pdata          emmc            /dev/block/mmcblk0p20
+/radiocab       emmc            /dev/block/mmcblk0p3
+/data           ext4            /dev/block/mmcblk0p15
+/devlog         emmc            /dev/block/mmcblk0p19
+/extra          emmc            /dev/block/mmcblk0p16
