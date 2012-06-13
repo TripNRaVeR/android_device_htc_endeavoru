@@ -34,15 +34,8 @@
 /dev/ttyHSUSB3	0660    autobot_access	autobot_access  #Autobot car pc
 /dev/ttyHSUSB1	0600    system	system  #Autobot car gps
 
+# camera (TeamNDVRu)
+/dev/block/mmcblk0p2      0660   media      camera
+
 # rfkill fix TripNRaVeR
 /dev/rfkill             0660    wifi        wifi
-
-/dev/codec_aic3008     0660    system   audio
-# Begin Immersion changes
-/dev/tspdrv               0666   root       root
-# End Immersion changes
-/dev/ewtzmu2daemon        0666   system     system
-/dev/ewtzmu2hal		  0666   system     system
-/dev/ewtzmu2		  0666   system     system
-/dev/akm8975_aot          0666   system	    system
-/dev/akm8975_daemon	  0666   system	    system

@@ -225,7 +225,7 @@ on boot
 	write /proc/sys/vm/dirty_writeback_centisecs 100
 	
 	# TripNDroid Mobile Engineering
-	write /proc/sys/vm/vfs_cache_pressure 75
+	write /proc/sys/vm/vfs_cache_pressure 50
     write /proc/sys/vm/swappiness 0
 	write /proc/sys/vm/drop_caches 3
 	write /proc/sys/vm/laptop_mode 5
@@ -234,7 +234,6 @@ on boot
 	
 	# TripNDroid Mobile Engineering properties
 	setprop persist.sys.purgeable_assets 1
-	setprop persist.sys.use_dithering 1
 	setprop ro.config.nocheckin 1
 	
 	# TripNDroid Mobile Engineering network tweaks
@@ -489,7 +488,9 @@ service ril-daemon /system/bin/rild
     class core
     socket rild stream 660 root radio
     socket rild-debug stream 660 radio system
-	socket rild-audio-gsm stream 660 radio system
+    socket rild-audio-gsm stream 660 radio system
+    socket rild-htc-coredump stream 660 radio system
+    socket rild-agps stream 660 radio system
     user root
     group radio cache inet misc audio sdcard_rw
 
