@@ -1,4 +1,4 @@
-Header, ENR_soundeffet_2012_0220
+Header, ENR_soundeffet_2012_0312
 ## Group for phone ##
 Phone_Default,/system/etc/soundimage/Sound_BT_CarMode.txt
 Phone_Receiver_Dualmic,/system/etc/soundimage/Sound_Phone_Original_REC.txt
@@ -43,6 +43,10 @@ VOIP_Receiver,/system/etc/soundimage/Sound_Voip_Original_REC.txt
 VOIP_Speaker,/system/etc/soundimage/Sound_Voip_Original_SPK.txt
 VOIP_Headset,/system/etc/soundimage/Sound_Voip_Original_HP.txt
 VOIP_BT,/system/etc/soundimage/Sound_Voip_Original_BT.txt
+VOIP_Receiver_HW_AEC,/system/etc/soundimage/Sound_Voip_Original_REC_AEC.txt
+VOIP_Speaker_HW_AEC,/system/etc/soundimage/Sound_Voip_Original_SPK_AEC.txt
+VOIP_Headset_HW_AEC,/system/etc/soundimage/Sound_Voip_Original_HP_AEC.txt
+VOIP_BT_HW_AEC,/system/etc/soundimage/Sound_Voip_Original_BT_AEC.txt
 
 #################
 SKYPE_Receiver,

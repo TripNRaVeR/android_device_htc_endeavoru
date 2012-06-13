@@ -1,4 +1,4 @@
-#ENR_VOIP_0308			--------------------------------------------------------------- book 0 is selected
+#ENR_VOIP_0312			--------------------------------------------------------------- book 0 is selected
 w 30 00 00 
 w 30 7f 00 
 #			# reg[  0][  0][  1] = 0x01	; Initialize the device through software reset
