@@ -64,6 +64,9 @@ BOARD_GLOBAL_CFLAGS += -DHAVE_FM_RADIO
 # Hardware
 BOARD_HAVE_GPS := true
 
+# HDMI
+BOARD_HDMI_MIRROR_MODE := Scale
+
 # EGL settings
 BOARD_EGL_CFG := device/htc/endeavoru/prebuilt/egl.cfg
 TARGET_USES_GL_VENDOR_EXTENSIONS := true
