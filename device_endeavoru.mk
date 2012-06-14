@@ -178,6 +178,11 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/firmware/ti-connectivity/wl128x-fw-mr.bin.r5:system/etc/firmware/ti-connectivity/wl128x-fw-mr.bin.r5 \
     $(LOCAL_PATH)/prebuilt/firmware/ti-connectivity/wl1271-nvs.bin:system/etc/firmware/ti-connectivity/wl1271-nvs.bin
 
+# Hotspot
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/prebuilt/etc/wifi/hostapd.conf:system/etc/wifi/hostapd.conf \
+    $(LOCAL_PATH)/prebuilt/etc/wifi/TQS_D_1.7.ini:system/etc/wifi/TQS_D_1.7.ini
+
 # Ril
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/etc/Flash_Loader.conf:system/etc/Flash_Loader.conf \
@@ -290,6 +295,12 @@ PRODUCT_PACKAGES += \
     audio.a2dp.default \
     libaudioutils \
     libtinyalsa
+
+# Hostapd / TI fm
+PRODUCT_PACKAGES += \
+         hostapd_cli \
+         calibrator \
+         hostapd
 
 # Propertys specific for this device
 PRODUCT_PROPERTY_OVERRIDES := \

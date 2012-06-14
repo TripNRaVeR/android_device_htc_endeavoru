@@ -227,7 +227,7 @@ service htcbatt /system/bin/htcbatt
      class core
      oneshot
 
-# HTC_WIFI_START
+# WIFI_START
 service wpa_supplicant /system/bin/wpa_supplicant -Dnl80211 -iwlan0
     socket wpa_wlan0 dgram 660 wifi wifi
     disabled
@@ -252,7 +252,26 @@ service iprenew_p2p /system/bin/dhcpcd -n
 service dhcpcd_eth0 /system/bin/dhcpcd -ABKL
     disabled
     oneshot
-# HTC_WIFI_END
+
+service hostapd_bin /system/bin/hostapd -d /system/etc/wifi/hostapd.conf
+    socket wpa_wlan1 dgram 660 wifi wifi
+    disabled
+    oneshot
+
+service upd_nvs_wlan0 /system/bin/calibrator set upd_nvs /system/etc/wifi/TQS_D_1.7.ini /proc/calibration /data/misc/wifi/wl1271-nvs-calibrated.bin
+    disabled
+    class core
+    user root
+    group root
+    oneshot
+
+service chmod_nvs_wlan0 /system/bin/chmod 644 /data/misc/wifi/wl1271-nvs-calibrated.bin
+    disabled
+    class core
+    user root
+    group root
+    oneshot
+# WIFI_END
 
 # create filesystems if necessary
 service setup_fs /system/bin/setup_fs \
