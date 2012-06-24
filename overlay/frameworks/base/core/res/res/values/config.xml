@@ -172,7 +172,7 @@
     <!-- TripNRaVeR: always enable button lights -->
     <bool name="config_autoBrightnessButtonKeyboard">false</bool>
 
-    <bool name="config_animateScreenLights">false</bool>
+    <bool name="config_animateScreenLights">true</bool>
 
     <bool name="config_annoy_dianne">true</bool>
 
