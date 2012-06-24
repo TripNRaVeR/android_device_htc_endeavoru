@@ -322,9 +322,6 @@ $(call inherit-product, frameworks/base/build/phone-xhdpi-1024-dalvik-heap.mk)
 # Call the vendor to setup propiatory files
 $(call inherit-product-if-exists, vendor/htc/endeavoru/endeavoru-vendor.mk)
 
-# Copy bcm4329 firmware
-$(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4329/device-bcm.mk)
-
 # Device nameing
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 PRODUCT_NAME := full_endeavoru
