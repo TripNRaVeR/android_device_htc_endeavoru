@@ -169,6 +169,9 @@
     <!-- Default blink frequency for notification LED is 2 seconds. -->
     <integer name="config_defaultNotificationLedOff">2000</integer>
 
+    <!-- TripNRaVeR: always enable button lights -->
+    <bool name="config_autoBrightnessButtonKeyboard">false</bool>
+
     <bool name="config_animateScreenLights">false</bool>
 
     <bool name="config_annoy_dianne">true</bool>
