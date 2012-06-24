@@ -94,16 +94,17 @@ BOARD_USE_NEW_LIBRIL_HTC := true
 BOARD_USE_KINETO_COMPATIBILITY := true
 
 # Connectivity - Wi-Fi
-WPA_SUPPLICANT_VERSION      := VER_0_8_X
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
-BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_bcmdhd
-BOARD_HOSTAPD_DRIVER        := NL80211
-BOARD_HOSTAPD_PRIVATE_LIB   := lib_driver_cmd_bcmdhd
-BOARD_WLAN_DEVICE           := bcmdhd
-WIFI_DRIVER_FW_PATH_PARAM   := "/sys/module/bcmdhd/parameters/firmware_path"
-WIFI_DRIVER_FW_PATH_STA     := "/system/vendor/firmware/fw_bcmdhd.bin"
-WIFI_DRIVER_FW_PATH_P2P     := "/system/vendor/firmware/fw_bcmdhd_p2p.bin"
-WIFI_DRIVER_FW_PATH_AP      := "/system/vendor/firmware/fw_bcmdhd_apsta.bin"
+WPA_SUPPLICANT_VERSION := VER_0_8_X
+BOARD_WLAN_DEVICE := wl12xx_mac80211
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_wl12xx
+BOARD_HOSTAPD_DRIVER := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_wl12xx
+BOARD_SOFTAP_DEVICE_TI := NL80211
+BOARD_P2P_DEVICE_TI := NL80211
+WIFI_DRIVER_MODULE_NAME	:=  "wl12xx_sdio"
+WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/wl12xx_sdio.ko"
+COMMON_GLOBAL_CFLAGS += -DUSES_TI_MAC80211
 
 # Endeavor partition sizes
 BOARD_BOOTIMAGE_PARTITION_SIZE := 8388608
