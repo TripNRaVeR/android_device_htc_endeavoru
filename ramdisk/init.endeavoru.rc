@@ -169,11 +169,6 @@ on boot
     write /sys/kernel/debug/tegra_hotplug/max_cpus 1
     write /sys/module/cpuidle/parameters/lp2_in_idle 1
 
-#AUD
-    mkdir /data/audio
-    chmod 755 /data/audio
-    chown media audio /data/audio
-
 # compass/accelerometer daemon
 service akmd /system/bin/akmd
     class main
