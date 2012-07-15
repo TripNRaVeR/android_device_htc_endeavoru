@@ -158,7 +158,7 @@
 
     <!-- Number of database connections opened and managed by framework layer
          to handle queries on each database. -->
-    <integer name="db_connection_pool_size">2</integer>
+    <integer name="db_connection_pool_size">3</integer>
 
     <!-- Component name of the service providing network location support. -->
     <string name="config_networkLocationProvider">com.google.android.location.NetworkLocationProvider</string>
