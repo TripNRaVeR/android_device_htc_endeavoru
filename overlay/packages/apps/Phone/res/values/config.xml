@@ -14,7 +14,7 @@
      limitations under the License.
 -->
 
-<!-- shooteru-specific phone app resources. -->
+<!-- endeavoru-specific phone app resources. -->
 <resources>
 
     <!-- Determine whether calls to mute the microphone in PhoneUtils
