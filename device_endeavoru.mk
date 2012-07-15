@@ -257,16 +257,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
 	frameworks/base/nfc-extras/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml
 
-# file that declares the MIFARE NFC constant
-PRODUCT_COPY_FILES += \
-	device/sample/nxp/com.nxp.mifare.xml:system/etc/permissions/com.nxp.mifare.xml
-
-# NFC EXTRAS add-on API
-PRODUCT_PACKAGES += \
-	com.android.nfc_extras
-PRODUCT_COPY_FILES += \
-	frameworks/base/nfc-extras/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml
-
 # NFCEE access control
 ifeq ($(TARGET_BUILD_VARIANT),user)
     NFCEE_ACCESS_PATH := device/htc/endeavoru/nfcee_access.xml
