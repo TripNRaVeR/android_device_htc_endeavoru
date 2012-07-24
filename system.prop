@@ -16,17 +16,13 @@ ro.ril.stkprof.param=FFFFFFFF7F0000DF9703021F22000000000000000000401000000000000
 # HTC STUFF
 ro.phone_fat=1
 ro.fat_rsvd=66
-### TripNRaVeR: we need this temporarily
-persist.htc.audio.pcm.samplerate=48000
-persist.htc.audio.pcm.channels=2 
-### TripNRaVeR: out
 #
 # ENDEAVOR PRODUCT
 ro.sf.lcd_density=320
-ro.vold.umsdirtyratio=20
 pm.sleep_mode=1
 persist.sys.usb.config=mass_storage,adb
 persist.service.adb.enable=1
+drm.service.enabled=false
 #
 # PERFORMANCE
 dalvik.vm.execution-mode=int:jit

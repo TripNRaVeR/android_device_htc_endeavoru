@@ -52,13 +52,13 @@ char const*const RED_LED_FILE
         = "/sys/class/leds/red/brightness";
 
 char const*const GREEN_LED_FILE
-        = "/sys/class/leds/green/brightness";
+        = "sys/class/leds/green/brightness";
 
 char const*const BLUE_LED_FILE
         = "/sys/class/leds/blue/brightness";
 
 char const*const AMBER_LED_FILE
-        = "/sys/class/leds/amber/brightness";
+        = "sys/class/leds/amber/brightness";
 
 char const*const LCD_FILE
         = "sys/class/backlight/tegra-pwm-bl/brightness";
@@ -73,13 +73,13 @@ char const*const RED_BLINK_FILE
         = "/sys/class/leds/red/device/blink";
 
 char const*const AMBER_BLINK_FILE
-        = "/sys/class/leds/amber/blink";
+        = "sys/class/leds/amber/blink";
 
 char const*const KEYBOARD_FILE
         = "/sys/class/leds/keyboard-backlight/brightness";
 
 char const*const BUTTON_FILE
-        = "/sys/class/leds/button-backlight/brightness";
+        = "sys/class/leds/button-backlight/brightness";
 
 /**
  * device methods
@@ -113,7 +113,7 @@ write_int(char const* path, int value)
         return amt == -1 ? -errno : 0;
     } else {
         if (already_warned == 0) {
-            LOGE("write_int failed to open %s\n", path);
+            ALOGE("write_int failed to open %s\n", path);
             already_warned = 1;
         }
         return -errno;
@@ -134,7 +134,7 @@ handle_trackball_light_locked(struct light_device_t* dev)
     if (mode == 7 && g_backlight) {
         mode = 0;
     }
-    LOGV("%s g_backlight = %d, mode = %d, g_attention = %d\n",
+    ALOGV("%s g_backlight = %d, mode = %d, g_attention = %d\n",
         __func__, g_backlight, mode, g_attention);
 
     // If the value isn't changing, don't set it, because this
@@ -311,7 +311,7 @@ set_light_notifications(struct light_device_t* dev,
 {
     pthread_mutex_lock(&g_lock);
     g_notification = *state;
-    LOGV("set_light_notifications g_trackball=%d color=0x%08x",
+    ALOGV("set_light_notifications g_trackball=%d color=0x%08x",
             g_trackball, state->color);
     if (g_haveTrackballLight) {
         handle_trackball_light_locked(dev);
@@ -326,7 +326,7 @@ set_light_attention(struct light_device_t* dev,
         struct light_state_t const* state)
 {
     pthread_mutex_lock(&g_lock);
-    LOGV("set_light_attention g_trackball=%d color=0x%08x",
+    ALOGV("set_light_attention g_trackball=%d color=0x%08x",
             g_trackball, state->color);
     if (state->flashMode == LIGHT_FLASH_HARDWARE) {
         g_attention = state->flashOnMS;
@@ -410,7 +410,7 @@ static struct hw_module_methods_t lights_module_methods = {
 /*
  * The lights Module
  */
-const struct hw_module_t HAL_MODULE_INFO_SYM = {
+struct hw_module_t HAL_MODULE_INFO_SYM = {
     .tag = HARDWARE_MODULE_TAG,
     .version_major = 1,
     .version_minor = 0,

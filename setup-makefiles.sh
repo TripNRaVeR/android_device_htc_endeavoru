@@ -84,4 +84,3 @@ EOF
 USE_CAMERA_STUB := false
 EOF
 
-

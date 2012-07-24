@@ -26,6 +26,6 @@
     <bool name="hac_enabled">false</bool>
 
     <!-- Flag indicating if the device has incall noise suppresion -->
-    <bool name="has_in_call_noise_suppression">false</bool>
+    <bool name="has_in_call_noise_suppression">true</bool>
 
 </resources>
