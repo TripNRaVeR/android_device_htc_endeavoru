@@ -25,4 +25,6 @@
     <bool name="def_install_non_market_apps">true</bool>
     <!-- Accel -->
     <bool name="def_accelerometer_rotation">true</bool>
+    <!-- Device provisioned -->
+    <bool name="def_device_provisioned">false</bool>
 </resources>

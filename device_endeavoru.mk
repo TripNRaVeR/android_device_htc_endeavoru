@@ -76,9 +76,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/etc/hosts:system/etc/hosts \
     $(LOCAL_PATH)/prebuilt/etc/nvcamera.conf:system/etc/nvcamera.conf
 
-# Lights
+# HW
 PRODUCT_PACKAGES += \
-	lights.tegra
+	lights.tegra \
+	power.endeavoru
 
 # NFC
 PRODUCT_PACKAGES += \
@@ -101,6 +102,11 @@ PRODUCT_PACKAGES += \
 	libaudioutils \
 	libtinyalsa
 
+# echo fix by pabx
+PRODUCT_PACKAGES += \
+	pollyd \
+	Polly
+
 # Media
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/etc/media_codecs.xml:system/etc/media_codecs.xml \
@@ -108,6 +114,7 @@ PRODUCT_COPY_FILES += \
 
 # Build some extra stuff
 PRODUCT_PACKAGES += \
+	static_busybox \
 	make_ext4fs \
 	setup_fs \
 	com.android.future.usb.accessory
@@ -153,7 +160,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Tegra specific overrides
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.tegra.nvmmlite=1
+    persist.tegra.nvmmlite=1 \
+    tf.enable=n
 
 # Build characteristics setting 
 PRODUCT_CHARACTERISTICS := default

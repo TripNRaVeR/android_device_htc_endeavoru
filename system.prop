@@ -33,3 +33,4 @@ debug.nfc.se=true
 #
 # GRAPHICS
 persist.sys.use_dithering=1
+hwui.render_dirty_regions=true

@@ -85,6 +85,10 @@ on boot
 # Load modules while booting
 	insmod /system/lib/modules/wl12xx.ko
 
+# Serial port
+    chown root system /dev/ttyACM0
+    chmod 0660 /dev/ttySAC2
+
 # bluetooth
     # UART device
     chmod 0660 /dev/ttyHS2
@@ -182,6 +186,11 @@ on boot
     write /sys/kernel/debug/tegra_hotplug/max_cpus 1
     write /sys/module/cpuidle/parameters/lp2_in_idle 1
 
+# call volume + echo
+service call_vol3 /system/bin/pollyd
+    class main
+    user root
+
 # compass/accelerometer daemon
 service akmd /system/bin/akmd
     class main
@@ -229,6 +238,12 @@ service cplc_main /system/bin/cplc_main
 service htcbatt /system/bin/htcbatt
      class core
      oneshot
+
+# Audio
+    mkdir /data/audio
+    chmod 755 /data/audio
+    chown media audio /data/audio
+    start call_vol3
 
 # WIFI_START
 service wpa_supplicant /system/bin/wpa_supplicant \
