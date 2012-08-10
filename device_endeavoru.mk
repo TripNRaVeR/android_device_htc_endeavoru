@@ -78,8 +78,7 @@ PRODUCT_COPY_FILES += \
 
 # HW
 PRODUCT_PACKAGES += \
-	lights.tegra \
-	power.endeavoru
+	lights.tegra
 
 # NFC
 PRODUCT_PACKAGES += \
