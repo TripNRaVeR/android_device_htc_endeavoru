@@ -82,18 +82,23 @@
 
          Must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLevels">
-        <item>5</item>
-        <item>15</item>
+        <item>10</item>
         <item>50</item>
         <item>100</item>
         <item>200</item>
+        <item>300</item>
         <item>400</item>
-        <item>1000</item>
-        <item>2000</item>
+        <item>500</item>
+        <item>600</item>
+        <item>700</item>
+        <item>900</item>
+        <item>1100</item>
+        <item>1400</item>
+        <item>1700</item>
+        <item>2100</item>
+        <item>2500</item>
         <item>3000</item>
-        <item>5000</item>
-        <item>10000</item>
-        <item>30000</item>
+        <item>4000</item>
     </integer-array>
 
     <!-- Array of output values for LCD backlight corresponding to the LUX values
@@ -101,18 +106,23 @@
          than the size of the config_autoBrightnessLevels array.
          This must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLcdBacklightValues">
-        <item>5</item>
-        <item>20</item>
-        <item>30</item>
+        <item>10</item>
         <item>40</item>
-        <item>50</item>
         <item>60</item>
-        <item>70</item>
+        <item>64</item>
+        <item>68</item>
+        <item>72</item>
+        <item>76</item>
         <item>80</item>
+        <item>84</item>
+        <item>88</item>
+        <item>92</item>
+        <item>96</item>
+        <item>100</item>
         <item>130</item>
-        <item>180</item>
-        <item>255</item>
-        <item>255</item>
+        <item>160</item>
+        <item>190</item>
+        <item>220</item>
         <item>255</item>
     </integer-array>
 
@@ -127,6 +137,11 @@
         <item>60</item>
         <item>60</item>
         <item>60</item>
+        <item>60</item>
+        <item>60</item>
+        <item>60</item>
+        <item>0</item>
+        <item>0</item>
         <item>0</item>
         <item>0</item>
         <item>0</item>
@@ -143,6 +158,11 @@
         <item>60</item>
         <item>60</item>
         <item>60</item>
+        <item>60</item>
+        <item>60</item>
+        <item>60</item>
+        <item>0</item>
+        <item>0</item>
         <item>0</item>
         <item>0</item>
         <item>0</item>
@@ -162,14 +182,14 @@
     <bool translatable="false" name="config_wifi_p2p_support">false</bool>
 
     <!-- Minimum screen brightness allowed by the power manager. -->
-    <integer name="config_screenBrightnessDim">30</integer>
+    <integer name="config_screenBrightnessDim">10</integer>
 
     <!-- The default iface on which to monitor data use -->
     <string name="config_datause_iface">rmnet0</string>
 
     <!-- Number of database connections opened and managed by framework layer
          to handle queries on each database. -->
-    <integer name="db_connection_pool_size">6</integer>
+    <integer name="db_connection_pool_size">3</integer>
 
     <!-- Package name providing network location support. -->
     <string name="config_networkLocationProviderPackageName" translatable="false">com.google.android.location</string>
@@ -190,18 +210,10 @@
 
     <bool name="config_ui_enableFadingMarquee">true</bool>
 
-    <!-- Indicate whether closing the lid causes the device to go to sleep and opening
-         it causes the device to wake up. -->
-    <bool name="config_lidControlsSleep">true</bool>
-
-    <integer name="config_lidOpenRotation">0</integer>
+    <bool name="config_sf_slowBlur">true</bool>
 
     <!-- Disable hw keyboard -->
     <bool name="config_forceDisableHardwareKeyboard">true</bool>
-
-    <!-- When a database query is executed, the results retuned are paginated
-         in pages of size (in KB) indicated by this value -->
-    <integer name="config_cursorWindowSize">2048</integer>
 
 </resources>
 

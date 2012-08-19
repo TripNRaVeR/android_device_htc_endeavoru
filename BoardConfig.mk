@@ -15,7 +15,7 @@
 #
 
 # This needs to be defined first
-USE_CAMERA_STUB := true
+USE_CAMERA_STUB := false
 
 # inherit from the proprietary version
 -include vendor/htc/endeavoru/BoardConfigVendor.mk
@@ -35,25 +35,26 @@ TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_ARCH_VARIANT_CPU := cortex-a9
 ARCH_ARM_HAVE_TLS_REGISTER := true
 ARCH_ARM_HAVE_NEON := true
-ARCH_ARM_USE_NON_NEON_MEMCPY := true
+#ARCH_ARM_USE_NON_NEON_MEMCPY := true
 
 # Architecture - Tegra
 TARGET_BOARD_PLATFORM := tegra
 TARGET_TEGRA_VERSION := t30
 
 # Flags
-TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp
-TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
+KBUILD_CFLAGS += -O3
+TARGET_GLOBAL_CFLAGS += -mfpu=neon -fsched-spec-load -fforce-addr -ffast-math -finline-functions -funswitch-loops -fpredictive-commoning -ftree-vectorize -mvectorize-with-neon-quad
+TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -fsched-spec-load -fforce-addr -ffast-math -finline-functions -funswitch-loops -fpredictive-commoning -ftree-vectorize -mvectorize-with-neon-quad
 TARGET_EXTRA_CFLAGS += $(call cc-option, -mtune=cortex-a9)
 
 # ICS drivers
-COMMON_GLOBAL_CFLAGS += -DICS_AUDIO_BLOB -DICS_CAMERA_BLOB
+COMMON_GLOBAL_CFLAGS += -DICS_AUDIO_BLOB -DICS_CAMERA_BLOB -DDISABLE_HW_ID_MATCH_CHECK
+COMMON_GLOBAL_CPPFLAGS += -DDISABLE_HW_ID_MATCH_CHECK
 
 # Audio
 BOARD_USES_AUDIO_LEGACY := true
 BOARD_USES_GENERIC_AUDIO := true
 BOARD_USES_ALSA_AUDIO := true
-BOARD_HAS_SAMSUNG_VOLUME_BUG := true
 
 # Camera
 BOARD_USES_PROPRIETARY_LIBCAMERA := true
@@ -63,7 +64,7 @@ BOARD_HAVE_HTC_FFC := true
 BOARD_USE_SKIA_LCDTEXT := true
 BOARD_SKIP_ANDROID_DOC_BUILD := true
 TARGET_BOOTANIMATION_PRELOAD := true
-BOARD_NEEDS_MEMORYHEAPPMEM := true
+#BOARD_NEEDS_MEMORYHEAPPMEM := true
 
 # set value below to true when using tripndroid 3.1.10 kernel
 BOARD_USES_GENERIC_INVENSENSE := false
@@ -78,7 +79,7 @@ BOARD_EGL_CFG := device/htc/endeavoru/egl.cfg
 USE_OPENGL_RENDERER := true
 BOARD_USES_OVERLAY := true
 BOARD_USES_HWCOMPOSER := true
-#BOARD_NO_ALLOW_DEQUEUE_CURRENT_BUFFER := true
+BOARD_NO_ALLOW_DEQUEUE_CURRENT_BUFFER := true
 
 # Connectivity - Bluetooth
 BOARD_HAVE_BLUETOOTH := true
@@ -99,6 +100,7 @@ BOARD_SOFTAP_DEVICE_TI := NL80211
 BOARD_P2P_DEVICE_TI := NL80211
 WIFI_DRIVER_MODULE_NAME	:=  "wl12xx_sdio"
 WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/wl12xx_sdio.ko"
+WIFI_FIRMWARE_LOADER := ""
 COMMON_GLOBAL_CFLAGS += -DUSES_TI_MAC80211
 
 # Filesystem
@@ -115,7 +117,7 @@ BOARD_FLASH_BLOCK_SIZE := 4096
 # USB
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/class/android_usb/f_mass_storage/lun0/file"
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
-BOARD_VOLD_MAX_PARTITIONS := 20
+BOARD_VOLD_MAX_PARTITIONS := 22
 BOARD_HAS_SDCARD_INTERNAL := true
 
 # Try to build the kernel

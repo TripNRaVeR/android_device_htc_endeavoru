@@ -47,17 +47,13 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/usr/share/alsa/alsa.conf:system/usr/share/alsa/alsa.conf \
     $(LOCAL_PATH)/prebuilt/etc/asound.conf:system/etc/asound.conf
 
-# GPS
-PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/prebuilt/etc/SuplRootCert:system/etc/SuplRootCert
-
-# Wifi
-PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/prebuilt/etc/wifi/hostapd.conf:system/etc/wifi/hostapd.conf
-
 # Wifi
 PRODUCT_PACKAGES += \
-	TQS_D_1.7.ini \
+	dhcpcd.conf \
+	hostapd.conf \
+        TQS_D_1.7.ini \
+        TQS_D_1.7_127x.ini \
+        regulatory.bin \
 	calibrator
 
 # Modules
@@ -78,7 +74,8 @@ PRODUCT_COPY_FILES += \
 
 # HW
 PRODUCT_PACKAGES += \
-	lights.tegra
+	lights.tegra \
+	camera.tegra
 
 # NFC
 PRODUCT_PACKAGES += \
