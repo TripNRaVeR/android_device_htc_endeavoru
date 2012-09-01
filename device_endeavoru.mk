@@ -47,12 +47,17 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/usr/share/alsa/alsa.conf:system/usr/share/alsa/alsa.conf \
     $(LOCAL_PATH)/prebuilt/etc/asound.conf:system/etc/asound.conf
 
+# TripNDroid wifi firmware
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/prebuilt/tripndroid/tripndroid-mr.bin:system/etc/firmware/ti-connectivity/tripndroid-mr.bin \
+    $(LOCAL_PATH)/prebuilt/tripndroid/tripndroid-plt.bin:system/etc/firmware/ti-connectivity/tripndroid-plt.bin \
+    $(LOCAL_PATH)/prebuilt/tripndroid/tripndroid-sr.bin:system/etc/firmware/ti-connectivity/tripndroid-sr.bin
+
 # Wifi
 PRODUCT_PACKAGES += \
 	dhcpcd.conf \
 	hostapd.conf \
         TQS_D_1.7.ini \
-        TQS_D_1.7_127x.ini \
         regulatory.bin \
 	calibrator
 
@@ -61,6 +66,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/modules/baseband-xmm-power2.ko:system/lib/modules/baseband-xmm-power2.ko \
     $(LOCAL_PATH)/prebuilt/modules/btwilink.ko:system/lib/modules/btwilink.ko \
     $(LOCAL_PATH)/prebuilt/modules/cdc-acm.ko:system/lib/modules/cdc-acm.ko \
+    $(LOCAL_PATH)/prebuilt/modules/gps_drv.ko:system/lib/modules/gps_drv.ko \
     $(LOCAL_PATH)/prebuilt/modules/raw_ip_net.ko:system/lib/modules/raw_ip_net.ko \
     $(LOCAL_PATH)/prebuilt/modules/scsi_wait_scan.ko:system/lib/modules/scsi_wait_scan.ko \
     $(LOCAL_PATH)/prebuilt/modules/wl12xx.ko:system/lib/modules/wl12xx.ko \
@@ -75,7 +81,8 @@ PRODUCT_COPY_FILES += \
 # HW
 PRODUCT_PACKAGES += \
 	lights.tegra \
-	camera.tegra
+	camera.tegra \
+	power.endeavoru
 
 # NFC
 PRODUCT_PACKAGES += \
