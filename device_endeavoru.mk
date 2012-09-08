@@ -66,7 +66,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/modules/baseband-xmm-power2.ko:system/lib/modules/baseband-xmm-power2.ko \
     $(LOCAL_PATH)/prebuilt/modules/btwilink.ko:system/lib/modules/btwilink.ko \
     $(LOCAL_PATH)/prebuilt/modules/cdc-acm.ko:system/lib/modules/cdc-acm.ko \
-    $(LOCAL_PATH)/prebuilt/modules/gps_drv.ko:system/lib/modules/gps_drv.ko \
     $(LOCAL_PATH)/prebuilt/modules/raw_ip_net.ko:system/lib/modules/raw_ip_net.ko \
     $(LOCAL_PATH)/prebuilt/modules/scsi_wait_scan.ko:system/lib/modules/scsi_wait_scan.ko \
     $(LOCAL_PATH)/prebuilt/modules/wl12xx.ko:system/lib/modules/wl12xx.ko \
@@ -77,6 +76,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/etc/vold.fstab:system/etc/vold.fstab \
     $(LOCAL_PATH)/prebuilt/etc/hosts:system/etc/hosts \
     $(LOCAL_PATH)/prebuilt/etc/nvcamera.conf:system/etc/nvcamera.conf
+
+# HDMI
+PRODUCT_PACKAGES += \
+	hdmid
 
 # HW
 PRODUCT_PACKAGES += \
@@ -104,6 +107,10 @@ PRODUCT_PACKAGES += \
         audio.usb.default \
 	libaudioutils \
 	libtinyalsa
+
+# Enable AAC 5.1 decoder
+PRODUCT_PROPERTY_OVERRIDES += \
+	media.aac_51_output_enabled=true
 
 # echo fix by pabx
 PRODUCT_PACKAGES += \

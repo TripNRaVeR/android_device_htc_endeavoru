@@ -1,7 +1,7 @@
 
 on early-init
-    mount debugfs debugfs /sys/kernel/debug
-    write /sys/class/firmware/timeout 5
+    mount debugfs /sys/kernel/debug /sys/kernel/debug
+    write /sys/class/firmware/timeout 2
 
     # for backwards compatibility
     export EXTERNAL_STORAGE /mnt/sdcard
@@ -41,24 +41,19 @@ on boot
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
     chmod 0660                /sys/class/rfkill/rfkill0/state
 
-    chown system /sys/module/edp/parameters/edp_ap_limit
-    chown system /sys/devices/system/cpu/cpu_on
-    chown system /sys/kernel/debug/tegra_hotplug/min_cpus
-    chown system /sys/kernel/debug/tegra_hotplug/max_cpus
-    chown system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-    chown system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
-    chown system /sys/module/cpu_tegra3/parameters/auto_hotplug
-    chown system /sys/devices/system/cpu/cpu1/online
-    chown system /sys/devices/system/cpu/cpu2/online
-    chown system /sys/devices/system/cpu/cpu3/online
-    chown system /sys/module/cpu_tegra3/parameters/mp_policy
-    chown system /sys/module/cpu_tegra3/parameters/NwNs
-    chown system /sys/module/cpu_tegra3/parameters/TwTs
-    chown system /sys/module/cpu_tegra/parameters/cpu_user_cap
-    chown system /sys/kernel/debug/tegra_hotplug/min_cpus
+    chown system system /sys/module/edp/parameters/edp_ap_limit
+    chown system system /sys/devices/system/cpu/cpu_on
+    chown system system /sys/kernel/debug/tegra_hotplug/min_cpus
+    chown system system /sys/kernel/debug/tegra_hotplug/max_cpus
+    chown system system /sys/module/cpu_tegra3/parameters/auto_hotplug
+    chown system system /sys/devices/system/cpu/cpu1/online
+    chown system system /sys/devices/system/cpu/cpu2/online
+    chown system system /sys/devices/system/cpu/cpu3/online
+    chown system system /sys/module/cpu_tegra/parameters/cpu_user_cap
+    chown system system /sys/kernel/debug/tegra_hotplug/min_cpus
     chmod 0660 /sys/kernel/debug/tegra_hotplug/min_cpus
-    chown system /sys/htc/power_save
-    chown system /sys/kernel/debug/tegra_emc/eack_state
+    chown system system /sys/htc/power_save
+    chown system system /sys/kernel/debug/tegra_emc/eack_state
 
 # Radio signal
     chown radio radio /sys/class/power_supply/battery/charger_control
@@ -68,7 +63,7 @@ on boot
     chown media system /dev/mux9
 
 # Flashlight
-    chown radio system /sys/camera_led_status/led_ril_status
+    chown radio  system /sys/camera_led_status/led_ril_status
     chown system system /sys/camera_led_status/led_wimax_status
     chown system system /sys/camera_led_status/led_hotspot_status
     chown system camera /sys/class/leds/flashlight/brightness
@@ -79,11 +74,10 @@ on boot
     chmod 0664 /proc/net/xt_qtaguid/ctrl
 
 # Load modules while booting
-	insmod /system/lib/modules/wl12xx.ko
+    insmod /system/lib/modules/wl12xx.ko
 
 # Serial port
     chown root system /dev/ttyACM0
-    chmod 0660 /dev/ttySAC2
 
 # bluetooth
     # UART device
@@ -104,7 +98,7 @@ on boot
     chown media media /sys/devices/platform/tegra_uart.2/a2dp_tuning
 
 #GPS
-#    setprop ro.gps.supl.supported true
+    setprop ro.gps.supl.supported true
     mkdir /data/tigps
     mkdir /data/tigps/aiding
     mkdir /data/tigps/etc
@@ -130,9 +124,6 @@ on boot
     chown system system /sys/class/leds/green/blink
     chown system system /sys/class/leds/amber/brightness
     chown system system /sys/class/leds/amber/blink
-
-# BB UART settings
-#    chown radio system /dev/ttyHS0
 
 # BB remote file system
     mkdir /data/rfs
@@ -164,7 +155,7 @@ on boot
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor interactive
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor interactive
     write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 30000
-	write /sys/devices/system/cpu/cpufreq/interactive/timer_rate 20000
+    write /sys/devices/system/cpu/cpufreq/interactive/timer_rate 20000
     write /sys/devices/system/cpu/cpufreq/interactive/boost_factor 2
     write /sys/devices/system/cpu/cpufreq/interactive/input_boost 1
     write /sys/devices/system/cpu/cpufreq/interactive/sustain_load 80
@@ -195,13 +186,6 @@ service bugreport /system/bin/dumpstate -d -v -o /sdcard/bugreports/bugreport
     disabled
     oneshot
     keycodes 115 114
-
-service poweron_modem /system/bin/poweron_modem_fls.sh /data/modem_work/
-    class main
-    user root
-    group root
-    oneshot
-    disabled
 
 service uim /system/bin/uim-sysfs
     class core

@@ -56,10 +56,8 @@
          Wifi interfaces.  If the device doesn't want to support tethering over Wifi this
          should be empty.  An example would be "softap.*" -->
     <string-array translatable="false" name="config_tether_wifi_regexs">
+        <item>"wlan1"</item>
         <item>"wlan0"</item>
-	<item>"wlan1"</item>
-	<item>"wl0.1"</item>
-	<item>"tiap0"</item>
     </string-array>
 
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
@@ -173,7 +171,7 @@
     </integer-array>
 
     <!-- Boolean indicating whether the wifi chipset has dual frequency band support -->
-    <bool translatable="false" name="config_wifi_dual_band_support">false</bool>
+    <bool translatable="false" name="config_wifi_dual_band_support">true</bool>
 
     <!-- Boolean indicating whether the wifi chipset has background scan support -->
     <bool translatable="false" name="config_wifi_background_scan_support">true</bool>
@@ -202,7 +200,7 @@
     <!-- TripNRaVeR: always enable button lights -->
     <bool name="config_autoBrightnessButtonKeyboard">false</bool>
 
-    <bool name="config_animateScreenLights">true</bool>
+    <!-- <bool name="config_animateScreenLights">true</bool> -->
 
     <bool name="config_ui_enableFadingMarquee">true</bool>
 
@@ -210,6 +208,9 @@
 
     <!-- Disable hw keyboard -->
     <bool name="config_forceDisableHardwareKeyboard">true</bool>
+
+    <!-- The attenuation in dB applied to the lock/unlock sounds. -->
+    <integer name="config_lockSoundVolumeDb">0</integer>
 
 </resources>
 

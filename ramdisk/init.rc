@@ -445,6 +445,12 @@ service init-acmx2 /system/bin/chmod 777 /dev/ttyACMX0
     class core
     oneshot
 
+service poweron_modem /system/bin/poweron_modem_fls.sh /data/modem_work/
+    class core
+    user root
+    group root
+    oneshot
+
 service ril-daemon /system/bin/rild
     class main
     socket rild stream 660 root radio

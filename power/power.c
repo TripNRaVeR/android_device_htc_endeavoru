@@ -62,7 +62,7 @@ static void endeavoru_power_init(struct power_module *module)
     sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/min_sample_time",
                 "30000");
     sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load",
-                "80");
+                "85");
     sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/boost_factor",
 		"0");
     sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/input_boost",
@@ -77,7 +77,7 @@ static void endeavoru_power_set_interactive(struct power_module *module, int on)
      */
 
     sysfs_write("/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq",
-                on ? "1500000" : "475000");
+                on ? "1300000" : "700000");
 
     sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/input_boost",
                 on ? "1" : "0");
@@ -113,7 +113,7 @@ struct power_module HAL_MODULE_INFO_SYM = {
         .hal_api_version = HARDWARE_HAL_API_VERSION,
         .id = POWER_HARDWARE_MODULE_ID,
         .name = "Endeavoru Power HAL",
-        .author = "The CyanogenMod Project",
+        .author = "The Android Open Source Project",
         .methods = &power_module_methods,
     },
 

@@ -46,10 +46,12 @@ touch.toolSize.isSummed = 0
 # units although we don't expect these values to be accurate.
 touch.pressure.calibration = amplitude
 touch.pressure.source = default
+touch.pressure.scale = 0.1
 #touch.pressure.scale = 0.0125
 
 # Size
-touch.size.calibration = normalized
+touch.size.calibration = default
+touch.size.scale = 20
 
 # Orientation
 touch.orientation.calibration = vector
