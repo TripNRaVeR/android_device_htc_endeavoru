@@ -24,6 +24,9 @@
 # logger should be world writable (for logging) but not readable
 /dev/log/*                0662   root       log
 
+# the msm hw3d client device node is world writable/readable.
+/dev/msm_hw3dc            0666   root       root
+
 # these should not be world writable
 /dev/diag                 0660   radio      radio
 /dev/diag_arm9            0660   radio      radio
@@ -32,22 +35,27 @@
 /dev/ttyMSM0              0600   bluetooth  bluetooth
 /dev/uinput               0660   system     bluetooth
 /dev/alarm                0664   system     radio
-/dev/tty                  0660   root       system
+/dev/tty0                 0660   root       system
 /dev/graphics/*           0660   root       graphics
+/dev/msm_hw3dm            0660   system     graphics
 /dev/input/*              0660   root       input
 /dev/eac                  0660   root       audio
 /dev/cam                  0660   root       camera
 /dev/pmem                 0660   system     graphics
 /dev/pmem_adsp*           0660   system     audio
 /dev/pmem_camera*         0660   system     camera
+/dev/oncrpc/*             0660   root       system
 /dev/adsp/*               0660   system     audio
 /dev/snd/*                0660   system     audio
+/dev/mt9t013              0660   system     system
+/dev/msm_camera/*         0660   system     system
 /dev/akm8976_daemon       0640   compass    system
 /dev/akm8976_aot          0640   compass    system
 /dev/akm8973_daemon       0640   compass    system
 /dev/akm8973_aot          0640   compass    system
 /dev/bma150               0640   compass    system
 /dev/cm3602               0640   compass    system
+/dev/akm8976_pffd         0640   compass    system
 /dev/lightsensor          0640   system     system
 /dev/msm_pcm_out*         0660   system     audio
 /dev/msm_pcm_in*          0660   system     audio
@@ -56,6 +64,8 @@
 /dev/msm_mp3*             0660   system     audio
 /dev/audience_a1026*      0660   system     audio
 /dev/tpa2018d1*           0660   system     audio
+/dev/msm_audpre           0660   system     audio
+/dev/msm_audio_ctl        0660   system     audio
 /dev/htc-acoustic         0660   system     audio
 /dev/vdec                 0660   system     audio
 /dev/q6venc               0660   system     audio

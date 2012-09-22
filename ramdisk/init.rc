@@ -310,7 +310,34 @@ on property:persist.sys.usb.config=*
     chown system system /sys/kernel/ipv4/tcp_rmem_def
     chown system system /sys/kernel/ipv4/tcp_rmem_max
     chown root radio /proc/cmdline
-    chown media system /dev/mux9
+
+# allow system to modify cpufreq control files
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/timer_rate
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/timer_rate
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/boost
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/boost
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/boostpulse
+    chown system system /sys/devices/system/cpu/cpufreq/interactive/input_boost
+    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/input_boost
+
+    # Assume SMP uses shared cpufreq policy for all CPUs
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+
+    chown system system /sys/block/mmcblk0/queue/scheduler
+    chmod 0664 /sys/block/mmcblk0/queue/scheduler
 
 # Define TCP buffer sizes for various networks
 #   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
@@ -321,14 +348,6 @@ on property:persist.sys.usb.config=*
     setprop net.tcp.buffersize.hspa    4094,87380,262144,4096,16384,262144
     setprop net.tcp.buffersize.edge    4093,26280,35040,4096,16384,35040
     setprop net.tcp.buffersize.gprs    4092,8760,11680,4096,8760,11680
-
-# allow system to modify cpufreq control files
-    chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-    chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
-    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
-    chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
 
 # allow system to modify ksm control files
     chown root system /sys/kernel/mm/ksm/pages_to_scan
@@ -425,30 +444,24 @@ service debuggerd /system/bin/debuggerd
     class main
 
 service gsm0710mux /system/bin/gsm0710muxd -s /dev/ttyACM0 -v 5 -n 8 -m basic
-    class core
+    class main
     user radio
     group radio cache inet misc
     disabled
 
 service nvm-server /system/bin/nvm_server
-    class core
+    class main
     socket nvm-ctl stream 660 radio radio
     user root
     group root
     oneshot
 
 service init-acmx0 /system/bin/mknod /dev/ttyACMX0 c 66 0
-    class core
+    class main
     oneshot
 
 service init-acmx2 /system/bin/chmod 777 /dev/ttyACMX0
-    class core
-    oneshot
-
-service poweron_modem /system/bin/poweron_modem_fls.sh /data/modem_work/
-    class core
-    user root
-    group root
+    class main
     oneshot
 
 service ril-daemon /system/bin/rild
@@ -457,6 +470,13 @@ service ril-daemon /system/bin/rild
     socket rild-debug stream 660 radio system
     user root
     group radio cache inet misc audio sdcard_rw log
+
+service poweron_modem /system/bin/poweron_modem_fls.sh /data/modem_work/
+    class main
+    user root
+    group root
+    oneshot
+    disabled
 
 service surfaceflinger /system/bin/surfaceflinger
     class main

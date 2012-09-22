@@ -32,6 +32,7 @@ DEVICE_PACKAGE_OVERLAYS := $(LOCAL_PATH)/overlay
 # if the xhdpi doesn't exist.
 PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
+PRODUCT_LOCALES += xhdpi
 
 # Files needed for boot image
 PRODUCT_COPY_FILES += \
@@ -77,15 +78,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/etc/hosts:system/etc/hosts \
     $(LOCAL_PATH)/prebuilt/etc/nvcamera.conf:system/etc/nvcamera.conf
 
-# HDMI
-PRODUCT_PACKAGES += \
-	hdmid
-
 # HW
 PRODUCT_PACKAGES += \
 	lights.tegra \
-	camera.tegra \
-	power.endeavoru
+	camera.tegra
 
 # NFC
 PRODUCT_PACKAGES += \
@@ -119,8 +115,8 @@ PRODUCT_PACKAGES += \
 
 # Media
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/etc/media_codecs.xml:system/etc/media_codecs.xml \
-    $(LOCAL_PATH)/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml
+	$(LOCAL_PATH)/prebuilt/etc/media_codecs.xml:system/etc/media_codecs.xml \
+	$(LOCAL_PATH)/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml
 
 # Build some extra stuff
 PRODUCT_PACKAGES += \
@@ -133,12 +129,22 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	Torch \
 	FileManager
-		
+
+# NFC packages
+PRODUCT_PACKAGES += \
+	nfc.endeavoru \
+	libnfc \
+	libnfc_jni \
+	Nfc \
+	Tag \
+	com.android.nfc_extras
+
 # Permissions
 PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
 	frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
 	frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
+	frameworks/native/data/etc/android.hardware.location.xml:system/etc/permissions/android.hardware.location.xml \
 	frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
 	frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
 	frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
@@ -152,7 +158,6 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
 	frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
 	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
-	frameworks/base/nfc-extras/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
 	packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml
 
 # Touchscreen
@@ -163,15 +168,15 @@ PRODUCT_COPY_FILES += \
 
 # Build.prop
 PRODUCT_PROPERTY_OVERRIDES += \
-    wifi.interface=wlan0 \
-    wifi.supplicant_scan_interval=240 \
-    ro.opengles.version=131072 \
-    dalvik.vm.dexopt-data-only=1
+	wifi.interface=wlan0 \
+	wifi.supplicant_scan_interval=240 \
+	ro.opengles.version=131072 \
+	dalvik.vm.dexopt-data-only=1
 
 # Tegra specific overrides
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.tegra.nvmmlite=1 \
-    tf.enable=n
+	persist.tegra.nvmmlite=1 \
+	tf.enable=n
 
 # Build characteristics setting 
 PRODUCT_CHARACTERISTICS := default
