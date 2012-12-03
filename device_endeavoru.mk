@@ -17,9 +17,6 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
-# GPS config
-$(call inherit-product, device/common/gps/gps_us_supl.mk)
-
 # Call the vendor files
 $(call inherit-product, vendor/htc/endeavoru/endeavoru-vendor.mk)
 
@@ -41,7 +38,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/ramdisk/init.endeavoru.rc:root/init.endeavoru.rc \
     $(LOCAL_PATH)/ramdisk/ueventd.endeavoru.rc:root/ueventd.endeavoru.rc \
     $(LOCAL_PATH)/ramdisk/ueventd.rc:root/ueventd.rc \
-    $(LOCAL_PATH)/ramdisk/init.usb.rc:root/init.usb.rc
+    $(LOCAL_PATH)/ramdisk/init.usb.rc:root/init.usb.rc \
+    $(LOCAL_PATH)/ramdisk/fstab.endeavoru:root/fstab.endeavoru
 
 # Sound
 PRODUCT_COPY_FILES += \
@@ -68,28 +66,26 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/modules/btwilink.ko:system/lib/modules/btwilink.ko \
     $(LOCAL_PATH)/prebuilt/modules/cdc-acm.ko:system/lib/modules/cdc-acm.ko \
     $(LOCAL_PATH)/prebuilt/modules/raw_ip_net.ko:system/lib/modules/raw_ip_net.ko \
-    $(LOCAL_PATH)/prebuilt/modules/scsi_wait_scan.ko:system/lib/modules/scsi_wait_scan.ko \
     $(LOCAL_PATH)/prebuilt/modules/wl12xx.ko:system/lib/modules/wl12xx.ko \
-    $(LOCAL_PATH)/prebuilt/modules/wl12xx_sdio.ko:system/lib/modules/wl12xx_sdio.ko
+    $(LOCAL_PATH)/prebuilt/modules/wlcore_sdio.ko:system/lib/modules/wlcore_sdio.ko
 
 # MISC
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/etc/vold.fstab:system/etc/vold.fstab \
-    $(LOCAL_PATH)/prebuilt/etc/hosts:system/etc/hosts \
     $(LOCAL_PATH)/prebuilt/etc/nvcamera.conf:system/etc/nvcamera.conf
+
+# GPS
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/prebuilt/etc/gps.conf:system/etc/gps.conf
 
 # HW
 PRODUCT_PACKAGES += \
 	lights.tegra \
 	camera.tegra
 
-# NFC
-PRODUCT_PACKAGES += \
-	libnfc \
-	libnfc_jni \
-	Nfc \
-	Tag \
-	com.android.nfc_extras	
+# Increase the HWUI font cache
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.hwui.text_cache_width=2048
 
 # Live Wallpapers
 PRODUCT_PACKAGES += \
@@ -122,6 +118,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
 	static_busybox \
 	make_ext4fs \
+	e2fsck \
 	setup_fs \
 	com.android.future.usb.accessory
 
@@ -130,7 +127,7 @@ PRODUCT_PACKAGES += \
 	Torch \
 	FileManager
 
-# NFC packages
+# NFC
 PRODUCT_PACKAGES += \
 	nfc.endeavoru \
 	libnfc \
@@ -138,6 +135,12 @@ PRODUCT_PACKAGES += \
 	Nfc \
 	Tag \
 	com.android.nfc_extras
+
+# NFC Permissions
+PRODUCT_COPY_FILES += \
+	frameworks/native/data/etc/com.nxp.mifare.xml:system/etc/permissions/com.nxp.mifare.xml \
+	frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
+	$(LOCAL_PATH)/prebuilt/etc/nfcee_access.xml:system/etc/nfcee_access.xml
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -190,3 +193,10 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 
 # dalvik
 $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
+
+# Device Naming
+PRODUCT_NAME := full_endeavoru
+PRODUCT_DEVICE := endeavoru
+PRODUCT_BRAND := htc_europe
+PRODUCT_MODEL := EndeavorU
+

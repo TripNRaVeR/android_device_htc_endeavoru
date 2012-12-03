@@ -26,7 +26,7 @@
     <bool name="noFaceDetectOnRearCamera">true</bool>
     <!-- The camera removes the focus modes by default when touch-to-focus
          exists. Use this option to change that behavior -->
-    <bool name="wantsFocusModes">true</bool>
+    <!-- <bool name="wantsFocusModes">true</bool> -->
     <!-- always use preferred size from camera parameters -->
     <bool name="alwaysUsePreferredPreviewSize">true</bool>
     <!-- ZSL mode -->

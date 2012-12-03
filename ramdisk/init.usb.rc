@@ -19,15 +19,6 @@ on property:sys.usb.config=adb
     start adbd
     setprop sys.usb.state $sys.usb.config
 
-on boot	
-    write /sys/class/android_usb/android0/iManufacturer $ro.product.manufacturer
-    write /sys/class/android_usb/android0/iProduct $ro.product.model
-    write /sys/class/android_usb/android0/iSerial $ro.serialno
-    write /sys/class/android_usb/android0/f_mass_storage/inquiry_string "HTC Android Phone             0000"
-    write /sys/class/android_usb/android0/f_rndis/manufacturer HTC
-    write /sys/class/android_usb/android0/f_rndis/vendorID 0bb4
-    write /sys/class/android_usb/android0/f_rndis/wceis 1
-
 on property:sys.usb.config=mass_storage
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor 0bb4
@@ -63,21 +54,20 @@ on property:sys.usb.config=rndis,adb
     write /sys/class/android_usb/android0/enable 1
     start adbd
     setprop sys.usb.state $sys.usb.config
+
+# Used to set USB configuration at boot and to switch the configuration
+# when changing the default configuration
+on property:persist.sys.usb.config=*
+    setprop sys.usb.config $persist.sys.usb.config
 	
-# for USB IPT
-service udhcpd0 /system/bin/logwrapper /system/bin/udhcpd
-	disabled
-	oneshot
+on init
+    write /sys/class/android_usb/android0/iSerial $ro.serialno
 
-service netsharing0_on /system/bin/netsharing net on
-	disabled
-	oneshot
-
-service netsharing0_off /system/bin/netsharing net off
-	disabled
-	oneshot
-
-service netsharing0_pass /system/bin/netsharing net_pass on
-	disabled
-	oneshot
-
+on boot
+    write /sys/class/android_usb/android0/iManufacturer $ro.product.manufacturer
+    write /sys/class/android_usb/android0/iProduct $ro.product.model
+	
+    write /sys/class/android_usb/android0/f_mass_storage/inquiry_string "HTC Android Phone             0000"
+    write /sys/class/android_usb/android0/f_rndis/manufacturer HTC
+    write /sys/class/android_usb/android0/f_rndis/vendorID 0bb4
+    write /sys/class/android_usb/android0/f_rndis/wceis 1

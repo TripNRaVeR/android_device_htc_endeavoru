@@ -16,6 +16,7 @@
 
 # This needs to be defined first
 USE_CAMERA_STUB := false
+BOARD_SKIP_ANDROID_DOC_BUILD := true
 
 # inherit from the proprietary version
 -include vendor/htc/endeavoru/BoardConfigVendor.mk
@@ -31,110 +32,102 @@ BOARD_KERNEL_PAGESIZE :=
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_SMP := true
+TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_ARCH_VARIANT_CPU := cortex-a9
-#ARCH_ARM_HAVE_TLS_REGISTER := true
+TARGET_DISABLE_ARM_PIE := true
+# Architecture - ARM
 ARCH_ARM_HAVE_NEON := true
-#ARCH_ARM_USE_NON_NEON_MEMCPY := true
+ARCH_ARM_HAVE_TLS_REGISTER := true
+ARCH_ARM_USE_NON_NEON_MEMCPY := true
 
 # Architecture - Tegra
 TARGET_BOARD_PLATFORM := tegra
 TARGET_TEGRA_VERSION := AP33H
 
+# Erratum to avoid the generation of ldrcc instructions
+NEED_WORKAROUND_CORTEX_A9_745320 := true
+
 # Flags
 KBUILD_CFLAGS += -O3
-TARGET_GLOBAL_CFLAGS += -mfpu=neon -fsched-spec-load -fforce-addr -ffast-math -finline-functions -funswitch-loops -fpredictive-commoning -ftree-vectorize -mvectorize-with-neon-quad
-TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -fsched-spec-load -fforce-addr -ffast-math -finline-functions -funswitch-loops -fpredictive-commoning -ftree-vectorize -mvectorize-with-neon-quad
-TARGET_EXTRA_CFLAGS += $(call cc-option, -mtune=cortex-a9)
+TARGET_GLOBAL_CFLAGS += -mfpu=neon -ffast-math -fvisibility-inlines-hidden
+TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -ffast-math -fvisibility-inlines-hidden
+TARGET_EXTRA_CFLAGS += $(call cc-option, -mtune=cortex-a9 -mcpu=cortex-a9)
 
 # ICS drivers
-COMMON_GLOBAL_CFLAGS += -DICS_AUDIO_BLOB -DICS_CAMERA_BLOB -DDISABLE_HW_ID_MATCH_CHECK
+COMMON_GLOBAL_CFLAGS += -DICS_AUDIO_BLOB -DICS_CAMERA_BLOB -DDISABLE_HW_ID_MATCH_CHECK -D__ARM_CACHE_LINE_SIZE=32
 COMMON_GLOBAL_CFLAGS += -DHTC_ACOUSTIC_AUDIO
 COMMON_GLOBAL_CPPFLAGS += -DDISABLE_HW_ID_MATCH_CHECK
 
-# TEST Flags
-COMMON_GLOBAL_CFLAGS += -DEXYNOS4X12_ENHANCEMENTS
-
 # Audio
-BOARD_USES_AUDIO_LEGACY := true
-BOARD_USES_GENERIC_AUDIO := true
-BOARD_USES_ALSA_AUDIO := true
-BOARD_USES_HW_MEDIARECORDER := true
-BOARD_USES_HW_MEDIAPLUGINS := true
+BOARD_USES_GENERIC_AUDIO := false
+BOARD_USES_ALSA_AUDIO := false
+BOARD_USES_TINY_AUDIO_HW := false
+BOARD_HAVE_HTC_AUDIO := true
 
 # Camera
-BOARD_USES_PROPRIETARY_LIBCAMERA := true
+BOARD_USES_CAMERA_FAST_AUTOFOCUS := true
 BOARD_HAVE_HTC_FFC := true
 
 # Misc settings
-BOARD_USE_SKIA_LCDTEXT := true
-BOARD_SKIP_ANDROID_DOC_BUILD := true
-TARGET_BOOTANIMATION_PRELOAD := true
-#BOARD_NEEDS_MEMORYHEAPPMEM := true
+BOARD_NEEDS_MEMORYHEAPPMEM := true
 ARCH_ARM_HAVE_32_BYTE_CACHE_LINES := true
-BOARD_USE_SCREENCAP := true
-TARGET_ELECTRONBEAM_FRAMES := 20
 BOARD_BATTERY_DEVICE_NAME := "htc_battery"
+BOARD_HAS_LOCKED_BOOTLOADER := true
+BOARD_USES_SECURE_SERVICES := true
 
-# set value below to true when using tripndroid 3.1.10 kernel
-#BOARD_USES_GENERIC_INVENSENSE := true
+# Media
+BOARD_USES_HW_MEDIARECORDER := true
+BOARD_USES_HW_MEDIAPLUGINS := true
 
 # WebKit
 ENABLE_WEBGL := true
 TARGET_FORCE_CPU_UPLOAD := true
 WEBCORE_ACCELERATED_SCROLLING := true
 
-# GPS
-BOARD_HAVE_GPS := true
-
 # Graphics
 BOARD_EGL_CFG := device/htc/endeavoru/egl.cfg
-USE_OPENGL_RENDERER := true
 BOARD_USES_OVERLAY := true
 BOARD_USES_HWCOMPOSER := true
 BOARD_NO_ALLOW_DEQUEUE_CURRENT_BUFFER := true
+TARGET_HAS_WAITFORVSYNC := true
 TARGET_HAVE_HDMI_OUT := true
 TARGET_USES_GL_VENDOR_EXTENSIONS := true
+USE_OPENGL_RENDERER := true
 
-# TEST
+# Graphics - Skia
+BOARD_USE_SKIA_LCDTEXT := true
 BOARD_USES_SKIAHWJPEG := true
-BOARD_USES_SKTEXTBOX := true
-BOARD_NONBLOCK_MODE_PROCESS := true
-BOARD_USE_METADATABUFFERTYPE := true
-BOARD_HAVE_BACK_MIC_CAMCORDER := true
 
 # Connectivity - Bluetooth
 BOARD_HAVE_BLUETOOTH := true
+BOARD_FORCE_STATIC_A2DP := true
+TARGET_NEEDS_BLUETOOTH_INIT_DELAY := true
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/htc/endeavoru/bluetooth
 
 # Connectivity - RIL
 BOARD_USE_NEW_LIBRIL_HTC := true
 TARGET_PROVIDES_LIBRIL := vendor/htc/endeavoru/proprietary/lib/libhtc-ril.so
-#BOARD_USE_KINETO_COMPATIBILITY := true
-
-# Sensors
-SENSORS_COMPASS_AK8975 := true
-SENSORS_ACCEL_BMA250_INPUT := true
-SENSORS_PROXIMITY_APDS9700 := true
 
 # Connectivity - Wi-Fi
 WIFI_BAND 			 := 802_11_ABGN
 BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
 WPA_SUPPLICANT_VERSION           := VER_0_8_X
-BOARD_WPA_SUPPLICANT_PRIVATE_LIB :=
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_wl12xx
 BOARD_HOSTAPD_DRIVER             := NL80211
-BOARD_HOSTAPD_PRIVATE_LIB        :=
+BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_wl12xx
 BOARD_WLAN_DEVICE                := wl12xx_mac80211
 BOARD_SOFTAP_DEVICE              := wl12xx_mac80211
-WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/wl12xx_sdio.ko"
-WIFI_DRIVER_MODULE_NAME          := "wl12xx_sdio"
+WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/wlcore_sdio.ko"
+WIFI_DRIVER_MODULE_NAME          := "wlcore_sdio"
 WIFI_FIRMWARE_LOADER             := ""
 USES_TI_MAC80211 		 := true
-BOARD_LEGACY_NL80211_STA_EVENTS  := true
 COMMON_GLOBAL_CFLAGS += -DUSES_TI_MAC80211
 
 # Filesystem
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_HAS_LARGE_FILESYSTEM := true
+BOARD_USES_MMCUTILS := true
 
 # Endeavor partition sizes
 BOARD_BOOTIMAGE_PARTITION_SIZE := 8388608
@@ -144,9 +137,10 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 2302672896
 BOARD_FLASH_BLOCK_SIZE := 4096
 
 # USB
-TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/class/android_usb/f_mass_storage/lun0/file"
+TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/fsl-tegra-udc/gadget/lun0/file"
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
-BOARD_VOLD_MAX_PARTITIONS := 22
+BOARD_VOLD_MAX_PARTITIONS := 20
+BOARD_SDCARD_INTERNAL_DEVICE := /dev/block/mmcblk0p14
 BOARD_HAS_SDCARD_INTERNAL := true
 
 # Try to build the kernel

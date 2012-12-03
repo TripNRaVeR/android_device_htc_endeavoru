@@ -35,6 +35,7 @@
     <string-array translatable="false" name="radioAttributes">
         <item>"1,1"</item>
         <item>"0,1"</item>
+        <item>"7,1"</item>
     </string-array>
 
    <integer-array translatable="false" name="config_tether_upstream_types">
@@ -56,8 +57,8 @@
          Wifi interfaces.  If the device doesn't want to support tethering over Wifi this
          should be empty.  An example would be "softap.*" -->
     <string-array translatable="false" name="config_tether_wifi_regexs">
-        <item>"wlan1"</item>
         <item>"wlan0"</item>
+        <item>"wlan1"</item>
     </string-array>
 
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
@@ -67,6 +68,7 @@
         <item>"bnep\\d"</item>
     </string-array>
 
+    <!-- Do we have automatic brightness? -->
     <bool name="config_automatic_brightness_available">true</bool>
 
     <!-- Array of light sensor LUX values to define our levels for auto backlight brightness support.
@@ -182,34 +184,38 @@
     <string name="config_datause_iface">rmnet0</string>
 
     <!-- Component name of the default wallpaper. This will be ImageWallpaper if not specified -->
-    <string name="default_wallpaper_component">com.android.phasebeam/.PhaseBeamWallpaper</string>
-
-    <!-- Package name providing network location support. -->
-    <string name="config_networkLocationProviderPackageName" translatable="false">com.google.android.location</string>
-
-    <!-- Package name providing geocoder API support. -->
-    <string name="config_geocodeProviderPackageName" translatable="false">com.google.android.location</string>
+    <!-- <string name="default_wallpaper_component">com.android.phasebeam/.PhaseBeamWallpaper</string> -->
 
     <!-- Default blink frequency for notification LED is 2 seconds. -->
     <integer name="config_defaultNotificationLedOff">2000</integer>
 
-    <!-- Battery led -->
+    <!-- Is the battery LED intrusive? -->
     <bool name="config_intrusiveBatteryLed">true</bool>
 
-    <!-- TripNRaVeR: always enable button lights -->
-    <bool name="config_autoBrightnessButtonKeyboard">false</bool>
-
-    <!-- <bool name="config_animateScreenLights">true</bool> -->
+    <!-- Is the notification LED intrusive? -->
+    <bool name="config_intrusiveNotificationLed">true</bool>
 
     <bool name="config_ui_enableFadingMarquee">true</bool>
 
     <bool name="config_sf_slowBlur">true</bool>
 
-    <!-- Disable hw keyboard -->
+    <!-- Always disable hw keyboard -->
     <bool name="config_forceDisableHardwareKeyboard">true</bool>
 
     <!-- The attenuation in dB applied to the lock/unlock sounds. -->
     <integer name="config_lockSoundVolumeDb">0</integer>
+
+    <!-- Enable screen off animation -->
+    <bool name="config_screenOffAnimation">true</bool>
+
+    <!-- The restoring is handled by modem if it is true-->
+    <bool name="skip_restoring_network_selection">false</bool>
+
+    <!-- animate screen lights needs to be disabled for screen off animation -->
+    <bool name="config_animateScreenLights">false</bool>
+
+    <!-- Indicate whether the SD card is accessible without removing the battery. -->
+    <bool name="config_batterySdCardAccessibility">false</bool>
 
 </resources>
 
