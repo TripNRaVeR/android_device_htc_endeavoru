@@ -35,24 +35,23 @@ TARGET_CPU_SMP := true
 TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_ARCH_VARIANT_CPU := cortex-a9
-TARGET_DISABLE_ARM_PIE := true
 # Architecture - ARM
 ARCH_ARM_HAVE_NEON := true
-ARCH_ARM_HAVE_TLS_REGISTER := true
+#ARCH_ARM_HAVE_TLS_REGISTER := true
 ARCH_ARM_USE_NON_NEON_MEMCPY := true
 
 # Architecture - Tegra
 TARGET_BOARD_PLATFORM := tegra
-TARGET_TEGRA_VERSION := AP33H
+TARGET_TEGRA_VERSION := t30
 
 # Erratum to avoid the generation of ldrcc instructions
 NEED_WORKAROUND_CORTEX_A9_745320 := true
 
 # Flags
 KBUILD_CFLAGS += -O3
-TARGET_GLOBAL_CFLAGS += -mfpu=neon -ffast-math -fvisibility-inlines-hidden
-TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -ffast-math -fvisibility-inlines-hidden
-TARGET_EXTRA_CFLAGS += $(call cc-option, -mtune=cortex-a9 -mcpu=cortex-a9)
+TARGET_GLOBAL_CFLAGS += -mfpu=neon -fvisibility-inlines-hidden -march=armv7-a -ffast-math
+TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -fvisibility-inlines-hidden -march=armv7-a -ffast-math
+TARGET_EXTRA_CFLAGS += $(call cc-option, -mtune=cortex-a9 -mcpu=cortex-a9 -march=armv7-a)
 
 # ICS drivers
 COMMON_GLOBAL_CFLAGS += -DICS_AUDIO_BLOB -DICS_CAMERA_BLOB -DDISABLE_HW_ID_MATCH_CHECK -D__ARM_CACHE_LINE_SIZE=32
@@ -67,18 +66,19 @@ BOARD_HAVE_HTC_AUDIO := true
 
 # Camera
 BOARD_USES_CAMERA_FAST_AUTOFOCUS := true
+BOARD_CAMERA_HAVE_ISO := true
+CAMERA_USES_SURFACEFLINGER_CLIENT_STUB := true
 BOARD_HAVE_HTC_FFC := true
 
 # Misc settings
 BOARD_NEEDS_MEMORYHEAPPMEM := true
 ARCH_ARM_HAVE_32_BYTE_CACHE_LINES := true
 BOARD_BATTERY_DEVICE_NAME := "htc_battery"
-BOARD_HAS_LOCKED_BOOTLOADER := true
 BOARD_USES_SECURE_SERVICES := true
 
 # Media
-BOARD_USES_HW_MEDIARECORDER := true
-BOARD_USES_HW_MEDIAPLUGINS := true
+#BOARD_USES_HW_MEDIARECORDER := true
+#BOARD_USES_HW_MEDIAPLUGINS := true
 
 # WebKit
 ENABLE_WEBGL := true
@@ -87,7 +87,6 @@ WEBCORE_ACCELERATED_SCROLLING := true
 
 # Graphics
 BOARD_EGL_CFG := device/htc/endeavoru/egl.cfg
-BOARD_USES_OVERLAY := true
 BOARD_USES_HWCOMPOSER := true
 BOARD_NO_ALLOW_DEQUEUE_CURRENT_BUFFER := true
 TARGET_HAS_WAITFORVSYNC := true
@@ -97,12 +96,13 @@ USE_OPENGL_RENDERER := true
 
 # Graphics - Skia
 BOARD_USE_SKIA_LCDTEXT := true
-BOARD_USES_SKIAHWJPEG := true
+#BOARD_USES_SKIAHWJPEG := true
 
 # Connectivity - Bluetooth
 BOARD_HAVE_BLUETOOTH := true
-BOARD_FORCE_STATIC_A2DP := true
 TARGET_NEEDS_BLUETOOTH_INIT_DELAY := true
+# enable bcm is an option to get bt running
+#BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/htc/endeavoru/bluetooth
 
 # Connectivity - RIL
@@ -110,19 +110,22 @@ BOARD_USE_NEW_LIBRIL_HTC := true
 TARGET_PROVIDES_LIBRIL := vendor/htc/endeavoru/proprietary/lib/libhtc-ril.so
 
 # Connectivity - Wi-Fi
-WIFI_BAND 			 := 802_11_ABGN
-BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
-WPA_SUPPLICANT_VERSION           := VER_0_8_X
+WIFI_BAND := 802_11_ABGN
+BOARD_WPA_SUPPLICANT_DRIVER := NL80211
+WPA_SUPPLICANT_VERSION := VER_0_8_X
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_wl12xx
-BOARD_HOSTAPD_DRIVER             := NL80211
-BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_wl12xx
-BOARD_WLAN_DEVICE                := wl12xx_mac80211
-BOARD_SOFTAP_DEVICE              := wl12xx_mac80211
-WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/wlcore_sdio.ko"
-WIFI_DRIVER_MODULE_NAME          := "wlcore_sdio"
-WIFI_FIRMWARE_LOADER             := ""
-USES_TI_MAC80211 		 := true
+BOARD_HOSTAPD_DRIVER := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_wl12xx
+BOARD_WLAN_DEVICE := wl12xx_mac80211
+BOARD_SOFTAP_DEVICE := wl12xx_mac80211
+WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/wlcore_sdio.ko"
+WIFI_DRIVER_MODULE_NAME := "wlcore_sdio"
+WIFI_FIRMWARE_LOADER := ""
+USES_TI_MAC80211 := true
 COMMON_GLOBAL_CFLAGS += -DUSES_TI_MAC80211
+
+# Sensors
+#BOARD_USES_GENERIC_INVENSENSE := true
 
 # Filesystem
 TARGET_USERIMAGES_USE_EXT4 := true

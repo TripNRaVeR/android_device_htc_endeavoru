@@ -80,8 +80,7 @@ PRODUCT_COPY_FILES += \
 
 # HW
 PRODUCT_PACKAGES += \
-	lights.tegra \
-	camera.tegra
+	lights.tegra
 
 # Increase the HWUI font cache
 PRODUCT_PROPERTY_OVERRIDES += \

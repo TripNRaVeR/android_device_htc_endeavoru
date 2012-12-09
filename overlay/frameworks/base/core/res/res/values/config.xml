@@ -178,7 +178,7 @@
     <bool translatable="false" name="config_wifi_p2p_support">false</bool>
 
     <!-- Minimum screen brightness allowed by the power manager. -->
-    <integer name="config_screenBrightnessDim">10</integer>
+    <integer name="config_screenBrightnessDim">2</integer>
 
     <!-- The default iface on which to monitor data use -->
     <string name="config_datause_iface">rmnet0</string>

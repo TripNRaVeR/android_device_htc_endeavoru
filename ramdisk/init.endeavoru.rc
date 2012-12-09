@@ -34,7 +34,7 @@ on post-fs-data
     mkdir /data/misc/dhcp 0770 dhcp dhcp
     mkdir /data/nvcam 0700 media camera
     chown dhcp dhcp /data/misc/dhcp
-	chmod 0660 /data/misc/wifi/dhcpd.conf
+   chmod 0660 /data/misc/wifi/dhcpd.conf
 	
 # create gps dirs
     mkdir /data/tigps 0770 system system
@@ -52,10 +52,22 @@ on boot
 # autosuspend root hubs immediatly after attached devices
 #	write /sys/bus/usb/devices/usb1/power/autosuspend_delay_ms 0
 
+# bluetooth UART device
+    chmod 0660 /dev/ttyHS2
+    chown bluetooth net_bt_stack /dev/ttyHS2
+    symlink /dev/ttyHS2 /dev/ttyO1
+
+# bluetooth MAC address programming
+    chown bluetooth net_bt_stack ro.bt.bdaddr_path
+    chown bluetooth net_bt_stack /system/etc/bluetooth
+    chown bluetooth net_bt_stack /data/misc/bluetooth
+    setprop ro.bt.bdaddr_path "/data/misc/bluetooth/bdaddr"
+
 # bluetooth power up/down interface
-    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
-    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
-    chmod 0660                /sys/class/rfkill/rfkill0/state
+    chmod 0660 /sys/class/rfkill/rfkill0/state
+    chmod 0660 /sys/class/rfkill/rfkill0/type
+    chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/state
+    chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/type
 
     chown system /sys/kernel/debug/tegra_hotplug/min_cpus
     chown system /sys/kernel/debug/tegra_hotplug/max_cpus
@@ -88,19 +100,7 @@ on boot
 # Serial port
     chown root system /dev/ttyACM0
 
-# bluetooth UART device
-    chmod 0660 /dev/ttyHS2
-    chown bluetooth bluetooth /dev/ttyHS2
-
-# bluetooth rfkill power up/down interface
-    chmod 0660 /sys/class/rfkill/rfkill0/state
-    chmod 0660 /sys/class/rfkill/rfkill0/type
-    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
-    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
-
-# bluetooth stuff
-    chown bluetooth bluetooth /system/etc/bluetooth
-
+# a2dp
     chown media media /sys/devices/platform/tegra_uart.2/a2dp_tuning
 	
 # wifi module

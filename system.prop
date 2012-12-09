@@ -5,7 +5,6 @@
 # RIL
 rild.libpath=/system/lib/libhtc_ril.so
 ro.telephony.ril.v3=signalstrength,skipbrokendatacall
-ro.telephony.default_network=0
 ro.ril.def.agps.mode=2
 rild.libargs=-e wwan0
 #
@@ -23,7 +22,7 @@ ro.sf.lcd_density=320
 persist.sys.usb.config=mass_storage,adb
 persist.service.adb.enable=1
 drm.service.enabled=false
-ro.vold.umsdirtyratio=100
+ro.vold.umsdirtyratio=10
 ro.phone_fat=1
 ro.fat_rsvd=66
 #
