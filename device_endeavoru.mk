@@ -55,10 +55,14 @@ PRODUCT_COPY_FILES += \
 # Wifi
 PRODUCT_PACKAGES += \
 	dhcpcd.conf \
-	hostapd.conf \
         TQS_D_1.7.ini \
         regulatory.bin \
-	calibrator
+	calibrator \
+	libnetcmdiface
+
+# Wifi hotspot
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/prebuilt/etc/wifi/hostapd.conf:system/etc/wifi/hostapd.conf
 
 # Modules
 PRODUCT_COPY_FILES += \
@@ -84,7 +88,8 @@ PRODUCT_PACKAGES += \
 
 # Increase the HWUI font cache
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.hwui.text_cache_width=2048
+    ro.hwui.text_cache_width=2048 \
+    ro.hwui.text_cache_height=256
 
 # Live Wallpapers
 PRODUCT_PACKAGES += \
@@ -160,6 +165,7 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
 	frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
 	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
+	frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
 	packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml
 
 # Touchscreen

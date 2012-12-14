@@ -37,21 +37,21 @@ TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_ARCH_VARIANT_CPU := cortex-a9
 # Architecture - ARM
 ARCH_ARM_HAVE_NEON := true
-#ARCH_ARM_HAVE_TLS_REGISTER := true
-ARCH_ARM_USE_NON_NEON_MEMCPY := true
+ARCH_ARM_HAVE_TLS_REGISTER := true
+#ARCH_ARM_USE_NON_NEON_MEMCPY := true
 
 # Architecture - Tegra
 TARGET_BOARD_PLATFORM := tegra
 TARGET_TEGRA_VERSION := t30
 
 # Erratum to avoid the generation of ldrcc instructions
-NEED_WORKAROUND_CORTEX_A9_745320 := true
+#NEED_WORKAROUND_CORTEX_A9_745320 := true
 
 # Flags
 KBUILD_CFLAGS += -O3
-TARGET_GLOBAL_CFLAGS += -mfpu=neon -fvisibility-inlines-hidden -march=armv7-a -ffast-math
-TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -fvisibility-inlines-hidden -march=armv7-a -ffast-math
-TARGET_EXTRA_CFLAGS += $(call cc-option, -mtune=cortex-a9 -mcpu=cortex-a9 -march=armv7-a)
+TARGET_GLOBAL_CFLAGS += -mfpu=neon
+TARGET_GLOBAL_CPPFLAGS += -mfpu=neon
+TARGET_EXTRA_CFLAGS += $(call cc-option, -mtune=cortex-a9 -mcpu=cortex-a9 -march=armv7-a-neon)
 
 # ICS drivers
 COMMON_GLOBAL_CFLAGS += -DICS_AUDIO_BLOB -DICS_CAMERA_BLOB -DDISABLE_HW_ID_MATCH_CHECK -D__ARM_CACHE_LINE_SIZE=32
@@ -59,8 +59,9 @@ COMMON_GLOBAL_CFLAGS += -DHTC_ACOUSTIC_AUDIO
 COMMON_GLOBAL_CPPFLAGS += -DDISABLE_HW_ID_MATCH_CHECK
 
 # Audio
+USE_PROPRIETARY_AUDIO_EXTENSIONS := true
 BOARD_USES_GENERIC_AUDIO := false
-BOARD_USES_ALSA_AUDIO := false
+BOARD_USES_ALSA_AUDIO := true
 BOARD_USES_TINY_AUDIO_HW := false
 BOARD_HAVE_HTC_AUDIO := true
 
@@ -71,7 +72,7 @@ CAMERA_USES_SURFACEFLINGER_CLIENT_STUB := true
 BOARD_HAVE_HTC_FFC := true
 
 # Misc settings
-BOARD_NEEDS_MEMORYHEAPPMEM := true
+#BOARD_NEEDS_MEMORYHEAPPMEM := true
 ARCH_ARM_HAVE_32_BYTE_CACHE_LINES := true
 BOARD_BATTERY_DEVICE_NAME := "htc_battery"
 BOARD_USES_SECURE_SERVICES := true
@@ -101,8 +102,8 @@ BOARD_USE_SKIA_LCDTEXT := true
 # Connectivity - Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 TARGET_NEEDS_BLUETOOTH_INIT_DELAY := true
-# enable bcm is an option to get bt running
-#BOARD_HAVE_BLUETOOTH_BCM := true
+BOARD_FORCE_STATIC_A2DP := true
+BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/htc/endeavoru/bluetooth
 
 # Connectivity - RIL
@@ -110,18 +111,18 @@ BOARD_USE_NEW_LIBRIL_HTC := true
 TARGET_PROVIDES_LIBRIL := vendor/htc/endeavoru/proprietary/lib/libhtc-ril.so
 
 # Connectivity - Wi-Fi
-WIFI_BAND := 802_11_ABGN
-BOARD_WPA_SUPPLICANT_DRIVER := NL80211
-WPA_SUPPLICANT_VERSION := VER_0_8_X
+WIFI_BAND 			 := 802_11_ABGN
+BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
+WPA_SUPPLICANT_VERSION           := VER_0_8_X
+BOARD_HOSTAPD_DRIVER             := NL80211
+BOARD_WLAN_DEVICE                := wl12xx_mac80211
+BOARD_SOFTAP_DEVICE              := wl12xx_mac80211
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_wl12xx
-BOARD_HOSTAPD_DRIVER := NL80211
 BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_wl12xx
-BOARD_WLAN_DEVICE := wl12xx_mac80211
-BOARD_SOFTAP_DEVICE := wl12xx_mac80211
-WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/wlcore_sdio.ko"
-WIFI_DRIVER_MODULE_NAME := "wlcore_sdio"
-WIFI_FIRMWARE_LOADER := ""
-USES_TI_MAC80211 := true
+WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/wlcore_sdio.ko"
+WIFI_DRIVER_MODULE_NAME          := "wlcore_sdio"
+WIFI_FIRMWARE_LOADER             := ""
+USES_TI_MAC80211 		 := true
 COMMON_GLOBAL_CFLAGS += -DUSES_TI_MAC80211
 
 # Sensors
@@ -141,7 +142,7 @@ BOARD_FLASH_BLOCK_SIZE := 4096
 
 # USB
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/fsl-tegra-udc/gadget/lun0/file"
-BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
+#BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 BOARD_VOLD_MAX_PARTITIONS := 20
 BOARD_SDCARD_INTERNAL_DEVICE := /dev/block/mmcblk0p14
 BOARD_HAS_SDCARD_INTERNAL := true

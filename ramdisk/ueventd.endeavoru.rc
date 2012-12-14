@@ -10,6 +10,7 @@
 /dev/tegra_dc_0			0666	root	root
 /dev/tegra_dc_1			0666	root	root
 /dev/tegra_dc_ctrl		0666	root	root
+/dev/tegra-throughput   0666    system  system
 
 /dev/timerinfo			0444    system	system
 /dev/timerirq			0444    system	system
