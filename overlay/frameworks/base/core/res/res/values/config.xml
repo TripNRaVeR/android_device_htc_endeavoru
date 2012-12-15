@@ -177,7 +177,7 @@
     <bool translatable="false" name="config_wifi_p2p_support">false</bool>
 
     <!-- Minimum screen brightness allowed by the power manager. -->
-    <integer name="config_screenBrightnessDim">2</integer>
+    <integer name="config_screenBrightnessDim">10</integer>
 
     <!-- The default iface on which to monitor data use -->
     <string name="config_datause_iface">rmnet0</string>
@@ -207,14 +207,29 @@
     <!-- Enable screen off animation -->
     <bool name="config_screenOffAnimation">true</bool>
 
-    <!-- The restoring is handled by modem if it is true-->
-    <bool name="skip_restoring_network_selection">false</bool>
-
     <!-- animate screen lights needs to be disabled for screen off animation -->
     <bool name="config_animateScreenLights">false</bool>
 
     <!-- Indicate whether the SD card is accessible without removing the battery. -->
     <bool name="config_batterySdCardAccessibility">false</bool>
+
+    <!-- serial ports available to the serial manager -->
+    <string-array translatable="false" name="config_serialPorts">
+	<item>/dev/ttyACM0</item>
+	<item>/dev/ttyHS2</item>
+    </string-array>
+
+    <!-- platform needs to do one-time bluetooth address re-validation -->
+    <bool name="config_bluetooth_address_validation">true</bool>
+
+    <!-- default bluetooth profiles HSP_AG, ObexObjectPush, Audio, NAP -->
+    <bool name="config_bluetooth_default_profiles">false</bool>
+
+    <!--  Number of supported users -->
+    <integer name="config_multiuserMaximumUsers">6</integer>
+
+    <!-- Disable safe headphone volume -->
+    <bool name="config_safe_media_volume_enabled">false</bool>
 
 </resources>
 

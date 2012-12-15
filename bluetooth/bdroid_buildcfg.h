@@ -18,8 +18,6 @@
 #define _BDROID_BUILDCFG_H
 
 #define BTM_DEF_LOCAL_NAME   "HTC One X"
-
-#define BTIF_HF_SERVICES (BTA_HSP_SERVICE_MASK)
-#define BTIF_HF_SERVICE_NAMES  { BTIF_HSAG_SERVICE_NAME }
+#define BTA_DISABLE_DELAY 1000 /* in milliseconds */
 
 #endif

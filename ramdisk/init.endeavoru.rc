@@ -11,80 +11,88 @@ on early-init
     mkdir /mnt/usb 0000 system system
 
 on fs
-    setprop ro.crypto.umount_sd false
-	
-# create basic dirs
+	setprop ro.crypto.umount_sd false
+
     mkdir /rca 0775 radio radio
     mkdir /rfs 0755 radio radio
     mkdir /devlog 0700 root root
-    mount_all /fstab.endeavoru
+
+	mount_all /fstab.endeavoru
+
+on post-fs-data
+
+# chmod modem dirs
     chmod 0660 /rca/calib.nvm
     chmod 0660 /rca
     chmod 0660 /rfs
-
-on post-fs-data
-# Set indication (checked by vold) that we have finished this action
-    setprop vold.post_fs_data_done 1
-
-	start poweron_modem
-		
+	
 # create wifi dirs
     mkdir /data/misc/wifi 0770 wifi wifi
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
     mkdir /data/misc/dhcp 0770 dhcp dhcp
     mkdir /data/nvcam 0700 media camera
-    chown dhcp dhcp /data/misc/dhcp
-    chmod 0660 /data/misc/wifi/dhcpd.conf
+    chown dhcp system /data/misc/dhcp
 	
 # create gps dirs
-    mkdir /data/tigps 0770 system system
-    mkdir /data/tigps/aiding 0770 system system
-    mkdir /data/tigps/logs 0770 system system
-    mkdir /data/tigps/etc 0770 system system
-    mkdir /data/RXN 0770 system system
-    mkdir /data/RXN/RXN 0770 system system
-    mkdir /data/RXN/RXN/pred 0770 system system
-    chmod 0755 /system/bin/RXN_IntApp
-    chmod 0770 /system/etc/gps/tigpsrouter
-    chmod 0777 /dev/tihci
+	mkdir /data/tigps 0770 system system
+	mkdir /data/tigps/aiding 0770 system system
+	mkdir /data/tigps/logs 0770 system system
+	mkdir /data/tigps/etc 0770 system system
+	mkdir /data/RXN 0770 system system
+	mkdir /data/RXN/RXN 0770 system system
+	mkdir /data/RXN/RXN/pred 0770 system system
+	chmod 0755 /system/bin/RXN_IntApp
+	chmod 0770 /system/etc/gps/tigpsrouter
+	chmod 0777 /dev/tihci
+
+# audio dirs for polly+setgid
+    mkdir /data/audio 0775 media audio
+    chmod 2770 /data/audio
+	
+# Set indication (checked by vold) that we have finished this action
+    setprop vold.post_fs_data_done 1
 
 on boot
-# autosuspend root hubs immediatly after attached devices
-#	write /sys/bus/usb/devices/usb1/power/autosuspend_delay_ms 0
+
+# start tegra modem
+	start poweron_modem
+
+# wifi module
+	chmod 0444 /system/lib/modules/wl12xx.ko
+	insmod /system/lib/modules/wl12xx.ko
 
 # bluetooth UART device
-    chmod 0660 /dev/ttyHS2
-    chown bluetooth net_bt_stack /dev/ttyHS2
-    symlink /dev/ttyHS2 /dev/ttyO1
+	chmod 0600 /dev/ttyHS2
+	chown bluetooth net_bt_stack /dev/ttyHS2
 
 # bluetooth MAC address programming
-    chown bluetooth net_bt_stack ro.bt.bdaddr_path
-    chown bluetooth net_bt_stack /system/etc/bluetooth
-    chown bluetooth net_bt_stack /data/misc/bluetooth
-    setprop ro.bt.bdaddr_path "/data/misc/bluetooth/bdaddr"
+	chown bluetooth net_bt_stack ro.bt.bdaddr_path
+	chown bluetooth net_bt_stack /system/etc/bluetooth
+	chown bluetooth net_bt_stack /data/misc/bluetooth
+	setprop ro.bt.bdaddr_path "/data/misc/bluetooth/bdaddr"
 
 # bluetooth power up/down interface
-    chmod 0660 /sys/class/rfkill/rfkill0/state
-    chmod 0660 /sys/class/rfkill/rfkill0/type
-    chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/state
-    chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/type
-
-    chown system /sys/kernel/debug/tegra_hotplug/min_cpus
-    chown system /sys/kernel/debug/tegra_hotplug/max_cpus
-    chown system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-    chown system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
-    chown system /sys/module/cpu_tegra3/parameters/auto_hotplug
-    chown system /sys/devices/system/cpu/cpu1/online
-    chown system /sys/devices/system/cpu/cpu2/online
-    chown system /sys/devices/system/cpu/cpu3/online
-    chown system /sys/module/cpu_tegra/parameters/cpu_user_cap
-    chown system /sys/kernel/debug/tegra_emc/eack_state
+	chmod 0600 /sys/class/rfkill/rfkill0/state
+	chmod 0600 /sys/class/rfkill/rfkill0/type
+	chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/state
+	chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/type
+	
+# nv-tegra cpu stuff
+	chown system /sys/kernel/debug/tegra_hotplug/min_cpus
+	chown system /sys/kernel/debug/tegra_hotplug/max_cpus
+	chown system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+	chown system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+	chown system /sys/module/cpu_tegra3/parameters/auto_hotplug
+	chown system /sys/devices/system/cpu/cpu1/online
+	chown system /sys/devices/system/cpu/cpu2/online
+	chown system /sys/devices/system/cpu/cpu3/online
+	chown system /sys/kernel/debug/tegra_emc/eack_state
 
 # Radio signal
-    chown radio radio /sys/class/power_supply/battery/charger_control
-    chmod 0660 /sys/class/power_supply/battery/charger_control
-    chown radio radio /sys/class/power_supply/battery/phone_call
-    chmod 0660 /sys/class/power_supply/battery/phone_call
+	chown radio radio /sys/class/power_supply/battery/charger_control
+	chmod 0660 /sys/class/power_supply/battery/charger_control
+	chown radio radio /sys/class/power_supply/battery/phone_call
+	chmod 0660 /sys/class/power_supply/battery/phone_call
 
 # Flashlight
     chown radio system /sys/camera_led_status/led_ril_status
@@ -94,20 +102,17 @@ on boot
     chmod 0660          /sys/class/leds/flashlight/brightness
 
 # Define DATA USAGE CTRL file permission
-    chown system system /proc/net/xt_qtaguid/ctrl
-    chmod 0664 /proc/net/xt_qtaguid/ctrl
+	chown system system /proc/net/xt_qtaguid/ctrl
+	chmod 0644 /proc/net/xt_qtaguid/ctrl
 
-# Serial port
-    chown root system /dev/ttyACM0
+# ip conntrack
+	chown root system /proc/net/ip_conntrack
 
 # a2dp
-    chown media media /sys/devices/platform/tegra_uart.2/a2dp_tuning
-	
-# wifi module
-	insmod /system/lib/modules/wl12xx.ko
+	chown media media /sys/devices/platform/tegra_uart.2/a2dp_tuning
 
 #GPS
-    setprop ro.gps.supl.supported true
+	setprop ro.gps.supl.supported true
 
 #NFC
     setprop ro.nfc.port "I2C"
@@ -132,6 +137,11 @@ on boot
     chown system system /sys/class/leds/green/blink
     chown system system /sys/class/leds/amber/brightness
     chown system system /sys/class/leds/amber/blink
+	
+# power
+    chown system system /sys/kernel/tegra_cap/core_cap_level
+    chown system system /sys/kernel/tegra_cap/core_cap_state
+    chown system system /sys/module/cpu_tegra/parameters/cpu_user_cap
 
 # BB remote file system
     mkdir /data/rfs
@@ -151,7 +161,7 @@ on boot
 # GPIO BB access for user radio
     chown radio system /sys/class/gpio/gpio32/value
 
-    # allow interfaces to get v6 address when tethering is enabled
+# allow interfaces to get v6 address when tethering is enabled
     chown system system /proc/sys/net/ipv6/conf/rmnet0/accept_ra
     chown system system /proc/sys/net/ipv6/conf/rmnet1/accept_ra
     chown system system /proc/sys/net/ipv6/conf/rmnet2/accept_ra
@@ -176,65 +186,52 @@ on boot
     write /sys/module/cpuidle/parameters/lp2_in_idle 0
 	
 # fuse
-    chmod 0444 /sys/firmware/fuse/odm_production_mode
+	chmod 0444 /sys/firmware/fuse/odm_production_mode
 
 # call volume + echo
 service call_vol3 /system/bin/pollyd
-    class main
-    user root
+	class main
+	user root
 
 # compass/accelerometer daemon
 service akmd /system/bin/akmd
-    class main
-    user compass
-    group compass misc input
+	class main
+	user compass
+	group compass misc input
     
 # gyro daemon
 service ewtzmud /system/bin/ewtzmud
-    class main
-    user system
-    group system misc input
+	class main
+	user system
+	group system misc input
 
 # bugreport is triggered by the VOLUME-DOWN and VOLUME-UP keys/
 service bugreport /system/bin/dumpstate -d -v -o /sdcard/bugreports/bugreport
-    disabled
-    oneshot
-    keycodes 115 114
-
-service uim /system/bin/uim-sysfs
-    class core
-    user system
-    group bluetooth net_bt_admin
-    oneshot
+	disabled
+	oneshot
+	keycodes 115 114
 
 service nav /system/bin/navl_server --android_log NAVD-p3 -nav\"-c/system/etc/pathconfigfile.txt\"
     class main
-    user system
-    group system
-    oneshot
+	user system
+	oneshot
 
 service rxn_intapp /system/bin/RXN_IntApp /system/etc/gps/RXN/MSLConfig.txt
-    class main
-    user system
-    group system
+	class main
 	
 service rilPos-daemon /system/bin/rilposd -l /system/lib/librilpos.so -- -c agps_v_channel
-    class main
-    user system
-    group system radio
-    disabled
-    oneshot
+	class main
+	disabled
+	oneshot
 
 service cplc_main /system/bin/cplc_main
-    class main
-    user system
-    group system radio
-    disabled
-    oneshot
+	class main
+	disabled
+	oneshot
 
 service htcbatt /system/bin/htcbatt
-    class core
-    oneshot
+	class core
+	oneshot
 
 # WIFI_START
 service wpa_supplicant /system/bin/wpa_supplicant \
@@ -311,16 +308,15 @@ service dhcpcd_bnep0 /system/bin/dhcpcd -ABKL
     disabled
     oneshot
 
-# call volume stuff
-    chown media audio /data/audio
+# start call volume stuff
     start call_vol3
 
 # Prepare TF service
 service tf_daemon /system/bin/tf_daemon -storageDir /data/tf -d
-    disabled
     class main
     user root
     group shell
+    disabled
     oneshot
 
 # Create data directory and start service
@@ -347,4 +343,10 @@ service charging /system/bin/charging
     user root
     group root
     disabled
+    oneshot
+	
+service uim /system/bin/uim-sysfs
+    class core
+	user root
+	group media net_bt_admin
     oneshot

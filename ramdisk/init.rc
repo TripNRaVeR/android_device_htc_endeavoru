@@ -34,9 +34,12 @@ loglevel 3
     export ANDROID_ROOT /system
     export ANDROID_ASSETS /system/app
     export ANDROID_DATA /data
+    export ANDROID_CACHE /cache
     export ANDROID_STORAGE /storage
     export ASEC_MOUNTPOINT /mnt/asec
     export LOOP_MOUNTPOINT /mnt/obb
+    export TERMINFO /system/etc/terminfo
+    export TERM linux
     export BOOTCLASSPATH /system/framework/core.jar:/system/framework/core-junit.jar:/system/framework/bouncycastle.jar:/system/framework/ext.jar:/system/framework/framework.jar:/system/framework/telephony-common.jar:/system/framework/mms-common.jar:/system/framework/android.policy.jar:/system/framework/services.jar:/system/framework/apache-xml.jar
 
 # Backward compatibility
@@ -225,6 +228,10 @@ on post-fs-data
     chown system system /data/dalvik-cache
     chmod 0771 /data/dalvik-cache
 
+    mkdir /cache/dalvik-cache 0771 system system
+    chown system system /cache/dalvik-cache
+    chmod 0771 /cache/dalvik-cache
+
     # create resource-cache and double-check the perms
     mkdir /data/resource-cache 0771 system system
     chown system system /data/resource-cache
@@ -243,8 +250,10 @@ on post-fs-data
     # Set indication (checked by vold) that we have finished this action
     #setprop vold.post_fs_data_done 1
 
-# Include extra init file
-    import /init.cm.rc
+# sysinit
+service sysinit /system/bin/sysinit
+    user root
+    oneshot
 
 on boot
 # basic network init
@@ -267,7 +276,9 @@ on boot
 
     # Tweak background writeout
     write /proc/sys/vm/dirty_expire_centisecs 200
-    write /proc/sys/vm/dirty_background_ratio  5
+    write /proc/sys/vm/dirty_background_ratio 5
+    write /proc/sys/vm/dirty_ratio 90
+    write /proc/sys/vm/vfs_cache_pressure 10
 
     # Permissions for System Server and daemons.
     chown radio system /sys/android_power/state
@@ -449,13 +460,14 @@ service debuggerd /system/bin/debuggerd
     class main
 
 service gsm0710mux /system/bin/gsm0710muxd -s /dev/ttyACM0 -v 5 -n 8 -m basic
-    class core
+    class main
     user radio
     group radio cache inet misc
     disabled
+    oneshot
 
 service nvm-server /system/bin/nvm_server
-    class core
+    class main
     socket nvm-ctl stream 660 radio radio
     user root
     group root
@@ -497,7 +509,7 @@ service drm /system/bin/drmserver
 service media /system/bin/mediaserver
     class main
     user media
-    group audio camera inet net_bt net_bt_admin net_bw_acct drmrpc qcom_diag
+    group audio camera inet net_bt net_bt_admin net_bw_acct drmrpc
     ioprio rt 4
 
 service bootanim /system/bin/bootanimation
@@ -550,3 +562,18 @@ service mdnsd /system/bin/mdnsd
     socket mdnsd stream 0660 mdnsr inet
     disabled
     oneshot
+	
+# Compcache - handle at boot
+service compcache /system/bin/handle_compcache
+    class main
+    user root
+    group root
+    oneshot
+	
+# adb over network
+on property:service.adb.tcp.port=5555
+    stop adbd
+    start adbd
+on property:service.adb.tcp.port=-1
+    stop adbd
+    start adbd

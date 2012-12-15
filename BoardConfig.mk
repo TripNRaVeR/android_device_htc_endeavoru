@@ -38,7 +38,6 @@ TARGET_ARCH_VARIANT_CPU := cortex-a9
 # Architecture - ARM
 ARCH_ARM_HAVE_NEON := true
 ARCH_ARM_HAVE_TLS_REGISTER := true
-#ARCH_ARM_USE_NON_NEON_MEMCPY := true
 
 # Architecture - Tegra
 TARGET_BOARD_PLATFORM := tegra
@@ -84,13 +83,13 @@ BOARD_USES_SECURE_SERVICES := true
 # WebKit
 ENABLE_WEBGL := true
 TARGET_FORCE_CPU_UPLOAD := true
-WEBCORE_ACCELERATED_SCROLLING := true
+#WEBCORE_ACCELERATED_SCROLLING := true
 
 # Graphics
 BOARD_EGL_CFG := device/htc/endeavoru/egl.cfg
+BOARD_EGL_NEEDS_LEGACY_FB := true
 BOARD_USES_HWCOMPOSER := true
 BOARD_NO_ALLOW_DEQUEUE_CURRENT_BUFFER := true
-TARGET_HAS_WAITFORVSYNC := true
 TARGET_HAVE_HDMI_OUT := true
 TARGET_USES_GL_VENDOR_EXTENSIONS := true
 USE_OPENGL_RENDERER := true
@@ -102,9 +101,9 @@ BOARD_USE_SKIA_LCDTEXT := true
 # Connectivity - Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 TARGET_NEEDS_BLUETOOTH_INIT_DELAY := true
-BOARD_FORCE_STATIC_A2DP := true
 BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/htc/endeavoru/bluetooth
+BOARD_BLUEDROID_VENDOR_CONF := device/htc/endeavoru/bluetooth/vnd_endeavoru.txt
 
 # Connectivity - RIL
 BOARD_USE_NEW_LIBRIL_HTC := true
@@ -119,8 +118,10 @@ BOARD_WLAN_DEVICE                := wl12xx_mac80211
 BOARD_SOFTAP_DEVICE              := wl12xx_mac80211
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_wl12xx
 BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_wl12xx
-WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/wlcore_sdio.ko"
-WIFI_DRIVER_MODULE_NAME          := "wlcore_sdio"
+WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/wl12xx_sdio.ko"
+WIFI_DRIVER_MODULE_NAME          := "wl12xx_sdio"
+#WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/wlcore_sdio.ko"
+#WIFI_DRIVER_MODULE_NAME          := "wlcore_sdio"
 WIFI_FIRMWARE_LOADER             := ""
 USES_TI_MAC80211 		 := true
 COMMON_GLOBAL_CFLAGS += -DUSES_TI_MAC80211

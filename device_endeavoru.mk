@@ -70,8 +70,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/modules/btwilink.ko:system/lib/modules/btwilink.ko \
     $(LOCAL_PATH)/prebuilt/modules/cdc-acm.ko:system/lib/modules/cdc-acm.ko \
     $(LOCAL_PATH)/prebuilt/modules/raw_ip_net.ko:system/lib/modules/raw_ip_net.ko \
+    $(LOCAL_PATH)/prebuilt/modules/scsi_wait_scan.ko:system/lib/modules/scsi_wait_scan.ko \
     $(LOCAL_PATH)/prebuilt/modules/wl12xx.ko:system/lib/modules/wl12xx.ko \
-    $(LOCAL_PATH)/prebuilt/modules/wlcore_sdio.ko:system/lib/modules/wlcore_sdio.ko
+    $(LOCAL_PATH)/prebuilt/modules/wl12xx_sdio.ko:system/lib/modules/wl12xx_sdio.ko
 
 # MISC
 PRODUCT_COPY_FILES += \
@@ -81,6 +82,10 @@ PRODUCT_COPY_FILES += \
 # GPS
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/etc/gps.conf:system/etc/gps.conf
+
+# BT+GPS+FM
+PRODUCT_PACKAGES += \
+	uim-sysfs
 
 # HW
 PRODUCT_PACKAGES += \
