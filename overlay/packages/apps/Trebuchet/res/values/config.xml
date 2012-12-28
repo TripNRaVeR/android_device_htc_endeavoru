@@ -20,8 +20,4 @@
 <resources>
     <!-- LOL offcourse largeHeap -->
     <bool name="config_largeHeap">true</bool>
-
-    <!-- Endeavoru launcher -->
-    <bool name="config_cyanogenmod">true</bool>
-
 </resources>

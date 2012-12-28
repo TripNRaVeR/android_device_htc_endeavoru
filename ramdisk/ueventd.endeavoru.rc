@@ -1,60 +1,63 @@
 /dev/nvhost-ctrl		0666	root	root
 /dev/nvhost-gr2d		0666	root	root
 /dev/nvhost-gr3d		0666	root	root
-/dev/nvhost-isp		0666	root	root
-/dev/nvhost-mpe		0666	root	root
-/dev/nvhost-vi		0666	root	root
+/dev/nvhost-isp			0666	root	root
+/dev/nvhost-mpe			0666	root	root
+/dev/nvhost-vi			0666	root	root
 /dev/nvhdcp1			0666	system	system
 /dev/nvmap		    	0666	system	system
 /dev/knvmap		    	0660	system	system
-/dev/tegra_dc_0		0666	root	root
-/dev/tegra_dc_1		0666	root	root
+/dev/tegra_dc_0			0666	root	root
+/dev/tegra_dc_1			0666	root	root
 /dev/tegra_dc_ctrl		0666	root	root
 /dev/tegra-throughput	0666	system  system
 
 /dev/timerinfo			0444    system	system
 /dev/timerirq			0444    system	system
 /dev/tf_driver			0660    drmrpc	drmrpc
-/dev/tigps			0640    system	system
+/dev/tigps				0640    system	system
 
 /dev/tegra_camera		0660   system     camera
 /dev/rawchip0			0660   system     camera
-/dev/s5k3h2y			0660   system     camera
-/dev/s5k6a1gx03		0660   system     camera
+/dev/s5k3h2y			0660   media      camera
+/dev/s5k6a1gx03			0660   media      camera
 /dev/aat1271			0660   system     camera
-/dev/ad5823			0660   system     camera
+/dev/ad5823				0660   system     camera
 
-/dev/tegra_rpc		0660	media	  media
-/dev/tegra_sema		0660	media	  media
+/dev/tegra_rpc			0660	media	  media
+/dev/tegra_sema			0660	media	  media
 
-/dev/ttyHS2			0660    bluetooth     bluetooth
+/dev/ttyHS2				0660    bluetooth     bluetooth
 
 /dev/ttyACM*			0660    radio     system
 /dev/ttyACM3			0660    radio     log
 
+/dev/tfa9887				0664   system     audio
 /dev/codec_aic3008			0660   system     audio
-/dev/tegra_avpchannel			0660   media      media
+/dev/tegra_avpchannel		0660   media      media
 /dev/tegra_audio_avpchannel	0660   media      media
 
 /dev/ewtzmu2daemon		0666   system     system
 /dev/ewtzmu2hal			0666   system     system
-/dev/ewtzmu2				0666   system     system
+/dev/ewtzmu2			0666   system     system
+
 /dev/akm8975_daemon		0666   compass    system
-/dev/akm8975_aot			0666   compass    system
+/dev/akm8975_aot		0666   compass    system
 
 /dev/bma150			0666   system     system
 /dev/cm3602			0666   system     system
-/dev/lightsensor		0666   system     system
+/dev/lightsensor	0666   system     system
 
-/dev/emapi		0666   system     system
+/dev/emapi			0666   system     system
 /dev/fuse			0666   system     system
-/dev/xt_qtaguid	0666   system     system
+/dev/xt_qtaguid		0666   system     system
 
 /dev/ttyHSUSB0		0600   system     system
 /dev/ttySA0			0600   system     system
 
 /dev/block/mmcblk0p17       0660   root       system
-/dev/block/mmcblk0p2        0640   root       system
+/dev/block/mmcblk0p16		0660   root       system
+/dev/block/mmcblk0p2		0640   root       system
 
 # rfkill fix TripNRaVeR
 /dev/rfkill             0660    wifi        wifi

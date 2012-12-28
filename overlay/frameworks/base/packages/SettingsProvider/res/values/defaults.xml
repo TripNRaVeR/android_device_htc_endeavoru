@@ -23,8 +23,8 @@
     <bool name="def_screen_brightness_automatic_mode">true</bool>
     <!-- Non market apps -->
     <bool name="def_install_non_market_apps">true</bool>
-    <!-- Accel -->
-    <bool name="def_accelerometer_rotation">true</bool>
     <!-- Device provisioned -->
-    <bool name="def_device_provisioned">false</bool>
+    <bool name="def_device_provisioned">true</bool>
+    <!-- Disable the package verifier-->
+    <bool name="def_package_verifier_enable">false</bool>
 </resources>

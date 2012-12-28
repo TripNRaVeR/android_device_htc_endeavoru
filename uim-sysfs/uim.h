@@ -31,7 +31,7 @@
 #define HCI_HDR_OPCODE          0xff36
 #define WRITE_BD_ADDR_OPCODE	0xFC06
 #define RESP_PREFIX             0x04
-#define MAX_TRY                 5
+#define MAX_TRY                 10
 
 /* HCI Packet types */
 #define HCI_COMMAND_PKT         0x01
@@ -49,10 +49,9 @@
 #define EVT_CMD_STATUS          0x0F
 
 #define VERBOSE
-
+#ifdef ANDROID
 #define LOG_TAG "uim-sysfs"
 #define UIM_ERR(fmt, arg...)  ALOGE("uim:"fmt"\n" , ##arg)
-
 #if defined(UIM_DEBUG)          /* limited debug messages */
 #define UIM_START_FUNC()      ALOGE("uim: Inside %s", __FUNCTION__)
 #define UIM_DBG(fmt, arg...)  ALOGE("uim:"fmt"\n" , ## arg)
@@ -66,6 +65,10 @@
 #define UIM_DBG(fmt, arg...)
 #define UIM_VER(fmt, arg...)
 #endif
+#endif  /* ANDROID */
+
+#define KO_TTY_HCI      "/system/lib/modules/tty_hci.ko"
+#define KO_UHID       "/system/lib/modules/uhid.ko"
 
 /*Termios2 structure for setting the Custom baud rate*/
 struct termios2 {

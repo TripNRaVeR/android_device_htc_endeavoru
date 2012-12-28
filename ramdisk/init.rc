@@ -91,7 +91,7 @@ loglevel 3
     write /proc/sys/kernel/sched_wakeup_granularity_ns 2000000
     write /proc/sys/kernel/sched_compat_yield 1
     write /proc/sys/kernel/sched_child_runs_first 0
-    write /proc/sys/kernel/randomize_va_space 2
+    write /proc/sys/kernel/randomize_va_space 0
     write /proc/sys/kernel/kptr_restrict 2
     write /proc/sys/kernel/dmesg_restrict 1
     write /proc/sys/vm/mmap_min_addr 32768
@@ -277,8 +277,8 @@ on boot
     # Tweak background writeout
     write /proc/sys/vm/dirty_expire_centisecs 200
     write /proc/sys/vm/dirty_background_ratio 5
-    write /proc/sys/vm/dirty_ratio 90
-    write /proc/sys/vm/vfs_cache_pressure 10
+	# TripNDroid set to mode 3
+	write /proc/sys/vm/drop_caches 3
 
     # Permissions for System Server and daemons.
     chown radio system /sys/android_power/state
@@ -318,6 +318,12 @@ on boot
     chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
     chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
     chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+	
+# TripNDroid USB Fix
+    chown system system /sys/class/android_usb/f_modem/on
+    chown system system /sys/class/android_usb/f_diag/on
+    chown system system /sys/class/android_usb/f_rmnet/on
+    chown system system /sys/devices/platform/android_usb/usb_disable
 
     chown system system /sys/class/timed_output/vibrator/enable
     chown system system /sys/class/leds/keyboard-backlight/brightness
@@ -344,6 +350,7 @@ on boot
     chown system system /sys/kernel/ipv4/tcp_rmem_min
     chown system system /sys/kernel/ipv4/tcp_rmem_def
     chown system system /sys/kernel/ipv4/tcp_rmem_max
+	chmod 444 /proc/cmdline
     chown root radio /proc/cmdline
 
 # Define TCP buffer sizes for various networks
@@ -477,8 +484,9 @@ service ril-daemon /system/bin/rild
     class main
     socket rild stream 660 root radio
     socket rild-debug stream 660 radio system
+	socket rild-agps stream 660 radio system
     user root
-    group radio cache inet misc audio sdcard_r sdcard_rw qcom_oncrpc qcom_diag log
+    group radio cache inet misc audio sdcard_r sdcard_rw log
 
 service poweron_modem /system/bin/poweron_modem_fls.sh /data/modem_work/
     class main
@@ -561,6 +569,12 @@ service mdnsd /system/bin/mdnsd
     group inet net_raw
     socket mdnsd stream 0660 mdnsr inet
     disabled
+    oneshot
+
+service uim /system/bin/uim-sysfs
+    class main
+	user root
+	group media bluetooth
     oneshot
 	
 # Compcache - handle at boot

@@ -28,9 +28,11 @@
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <sys/utsname.h>
+
 #include "uim.h"
 
 #include <private/android_filesystem_config.h>
+
 #include <cutils/log.h>
 
 /* Maintains the exit state of UIM*/
@@ -520,14 +522,7 @@ int remove_modules()
 {
 	int err = 0;
 
-	UIM_VER(" Removing gps_drv ");
-	if (rmmod("gps_drv") != 0) {
-		UIM_ERR(" Error removing gps_drv module");
-		err = -1;
-	} else {
-		UIM_DBG(" Removed gps_drv module");
-	}
-
+/*
 	UIM_VER(" Removing btwilink ");
 	if (rmmod("btwilink") != 0) {
 		UIM_ERR(" Error removing btwilink module");
@@ -536,8 +531,10 @@ int remove_modules()
 		UIM_DBG(" Removed btwilink module");
 	}
 	UIM_DBG(" Removed btwilink module");
+*/
 
 	/*Remove the Shared Transport */
+/*
 	UIM_VER(" Removing st_drv ");
 	if (rmmod("st_drv") != 0) {
 		UIM_ERR(" Error removing st_drv module");
@@ -546,7 +543,7 @@ int remove_modules()
 		UIM_DBG(" Removed st_drv module ");
 	}
 	UIM_DBG(" Removed st_drv module ");
-
+*/
 	return err;
 }
 
@@ -555,7 +552,7 @@ int change_rfkill_perms(void)
 	int fd, id, sz;
 	char path[64];
 	char buf[16];
-	for (id = 0; id < 3; id++) {
+	for (id = 0; id < 50; id++) {
 		snprintf(path, sizeof(path), "/sys/class/rfkill/rfkill%d/type", id);
 		fd = open(path, O_RDONLY);
 		if (fd < 0) {
@@ -572,12 +569,14 @@ int change_rfkill_perms(void)
 	if (id == 50) {
 		return -1;
 	}
+
 	sprintf(path, "/sys/class/rfkill/rfkill%d/state", id);
 	sz = chown(path, AID_BLUETOOTH, AID_BLUETOOTH);
 	if (sz < 0) {
 		UIM_ERR("change mode failed for %s (%d)\n", path, errno);
 		return -1;
 	}
+
 	/*
 	 * bluetooth group's user system needs write permission
 	 */
@@ -639,9 +638,9 @@ int main(int argc, char *argv[])
 		UIM_ERR(" Usage: uim <bd address>");
 		return -1;
 	}
-
-	if (0 == lstat("/system/lib/modules/st_drv.ko", &file_stat)) {
-		if (insmod("/system/lib/modules/st_drv.ko", "") < 0) {
+/*
+	if (0 == lstat(KO_ST_DRV, &file_stat)) {
+		if (insmod(KO_ST_DRV, "") < 0) {
 			UIM_ERR(" Error inserting st_drv module");
 			return -1;
 		} else {
@@ -655,9 +654,11 @@ int main(int argc, char *argv[])
 			return -1;
 		}
 	}
+*/
 
-	if (0 == lstat("/system/lib/modules/btwilink.ko", &file_stat)) {
-		if (insmod("/system/lib/modules/btwilink.ko", "") < 0) {
+/*
+	if (0 == lstat(KO_BTWILINK, &file_stat)) {
+		if (insmod(KO_BTWILINK, "") < 0) {
 			UIM_ERR(" Error inserting btwilink module, NO BT? ");
 		} else {
 			UIM_DBG(" Inserted btwilink module");
@@ -666,32 +667,34 @@ int main(int argc, char *argv[])
 		UIM_DBG("BT driver module un-available... ");
 		UIM_DBG("BT driver built into the kernel ?");
 	}
-
-	if (0 == lstat("/system/lib/modules/gps_drv.ko", &file_stat)) {
-		if (insmod("/system/lib/modules/gps_drv.ko", "") < 0) {
-			UIM_ERR(" Error inserting gps_drv module, NO GPS? ");
-		} else {
-			UIM_DBG(" Inserted gps_drv module");
-		}
-	} else {
-		UIM_DBG("GPS driver module un-available... ");
-		UIM_DBG("GPS driver built into the kernel ?");
-	}
+*/
 
 	/* Change the permissions for v4l2 Fm device node */
 	if ((0 == lstat("/dev/radio0", &file_stat)) && chmod("/dev/radio0", 0666) < 0) {
 		UIM_ERR("unable to chmod /dev/radio0, might not exist");
 	}
+
 	if ((0 == lstat("/dev/tifm", &file_stat)) && chmod("/dev/tifm", 0666) < 0) {
 		UIM_ERR("unable to chmod /dev/tifm, might not exist");
 	}
+
+	if( insmod(KO_UHID, "") )
+		UIM_ERR(" Failed to load uhid module");
+
+	if( insmod(KO_TTY_HCI, "") == 0 ) {
+		chmod("/dev/tihci", 0660);
+		chown("/dev/tihci", AID_SYSTEM, AID_BLUETOOTH);
+	} else { 
+		UIM_ERR(" Failed to load tty_hci module");
+	}
+
 	/* change rfkill perms after insertion of BT driver which asks
 	 * the Bluetooth sub-system to create the rfkill device of type
 	 * "bluetooth"
 	 */
 	if (change_rfkill_perms() < 0) {
 		/* possible error condition */
-		UIM_ERR("rfkill not enabled in st_drv - BT on from UI might fail\n");
+		UIM_ERR("rfkill not enabled - BT on from UI might fail\n");
 	}
 
 	/* rfkill device's open/poll/read */

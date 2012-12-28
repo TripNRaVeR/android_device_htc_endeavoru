@@ -57,8 +57,7 @@ PRODUCT_PACKAGES += \
 	dhcpcd.conf \
         TQS_D_1.7.ini \
         regulatory.bin \
-	calibrator \
-	libnetcmdiface
+	calibrator
 
 # Wifi hotspot
 PRODUCT_COPY_FILES += \
@@ -67,10 +66,10 @@ PRODUCT_COPY_FILES += \
 # Modules
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/modules/baseband-xmm-power2.ko:system/lib/modules/baseband-xmm-power2.ko \
-    $(LOCAL_PATH)/prebuilt/modules/btwilink.ko:system/lib/modules/btwilink.ko \
     $(LOCAL_PATH)/prebuilt/modules/cdc-acm.ko:system/lib/modules/cdc-acm.ko \
-    $(LOCAL_PATH)/prebuilt/modules/raw_ip_net.ko:system/lib/modules/raw_ip_net.ko \
     $(LOCAL_PATH)/prebuilt/modules/scsi_wait_scan.ko:system/lib/modules/scsi_wait_scan.ko \
+    $(LOCAL_PATH)/prebuilt/modules/tty_hci.ko:system/lib/modules/tty_hci.ko \
+    $(LOCAL_PATH)/prebuilt/modules/uhid.ko:system/lib/modules/uhid.ko \
     $(LOCAL_PATH)/prebuilt/modules/wl12xx.ko:system/lib/modules/wl12xx.ko \
     $(LOCAL_PATH)/prebuilt/modules/wl12xx_sdio.ko:system/lib/modules/wl12xx_sdio.ko
 
@@ -85,7 +84,8 @@ PRODUCT_COPY_FILES += \
 
 # BT+GPS+FM
 PRODUCT_PACKAGES += \
-	uim-sysfs
+	uim-sysfs \
+	libbt-vendor
 
 # HW
 PRODUCT_PACKAGES += \
@@ -108,10 +108,6 @@ PRODUCT_PACKAGES += \
         audio.usb.default \
 	libaudioutils \
 	libtinyalsa
-
-# Enable AAC 5.1 decoder
-PRODUCT_PROPERTY_OVERRIDES += \
-	media.aac_51_output_enabled=true
 
 # echo fix by pabx
 PRODUCT_PACKAGES += \
