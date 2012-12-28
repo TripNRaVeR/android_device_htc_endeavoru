@@ -5,12 +5,12 @@ $(call inherit-product, device/htc/endeavoru/device_endeavoru.mk)
 # Release name
 PRODUCT_RELEASE_NAME := endeavoru
 
-# Inherit some common CM stuff.
-$(call inherit-product, vendor/cm/config/common_full_phone.mk)
-# Inherit CM gsm stuff
-$(call inherit-product, vendor/cm/config/gsm.mk)
+# Inherit some common stuff.
+$(call inherit-product, vendor/tripndroid/config/common_full_phone.mk)
+# Inherit gsm stuff
+$(call inherit-product, vendor/tripndroid/config/gsm.mk)
 # Enhanced NFC
-$(call inherit-product, vendor/cm/config/nfc_enhanced.mk)
+$(call inherit-product, vendor/tripndroid/config/nfc_enhanced.mk)
 
 # Boot animation
 TARGET_BOOTANIMATION_NAME := vertical-720x1280
@@ -23,7 +23,7 @@ TARGET_SCREEN_WIDTH := 720
 #
 # Setup device specific product configuration.
 #
-PRODUCT_NAME := cm_endeavoru
+PRODUCT_NAME := tripndroid_endeavoru
 PRODUCT_BRAND := htc_europe
 PRODUCT_DEVICE := endeavoru
 PRODUCT_MODEL := HTC One X
