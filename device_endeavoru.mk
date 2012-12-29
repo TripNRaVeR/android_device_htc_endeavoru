@@ -57,11 +57,8 @@ PRODUCT_PACKAGES += \
 	dhcpcd.conf \
         TQS_D_1.7.ini \
         regulatory.bin \
-	calibrator
-
-# Wifi hotspot
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/etc/wifi/hostapd.conf:system/etc/wifi/hostapd.conf
+	calibrator \
+	hostapd.conf
 
 # Modules
 PRODUCT_COPY_FILES += \
