@@ -80,15 +80,27 @@ on boot
 	chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/type
 	
 # nv-tegra cpu stuff
-	chown system /sys/kernel/debug/tegra_hotplug/min_cpus
-	chown system /sys/kernel/debug/tegra_hotplug/max_cpus
-	chown system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-	chown system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
-	chown system /sys/module/cpu_tegra3/parameters/auto_hotplug
-	chown system /sys/devices/system/cpu/cpu1/online
-	chown system /sys/devices/system/cpu/cpu2/online
-	chown system /sys/devices/system/cpu/cpu3/online
-	chown system /sys/kernel/debug/tegra_emc/eack_state
+    chown system /sys/module/edp/parameters/edp_ap_limit
+    chown system /sys/module/edp/parameters/edp_limits_table
+    chown system /sys/devices/system/cpu/cpufreq/ondemand/touch_poke
+    chown system /sys/devices/system/cpu/cpu_on
+    chown system /sys/kernel/debug/tegra_hotplug/min_cpus
+    chown system /sys/kernel/debug/tegra_hotplug/max_cpus
+    chown system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+    chown system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chown system /sys/module/cpu_tegra3/parameters/auto_hotplug
+    chown system /sys/devices/system/cpu/cpu1/online
+    chown system /sys/devices/system/cpu/cpu2/online
+    chown system /sys/devices/system/cpu/cpu3/online
+    chown system /sys/module/cpu_tegra3/parameters/mp_policy
+    chown system /sys/module/cpu_tegra3/parameters/NwNs
+    chown system /sys/module/cpu_tegra3/parameters/TwTs
+    chown system /sys/module/cpu_tegra/parameters/cpu_user_cap
+    chown radio radio /sys/module/cpu_tegra/parameters/ril_boost
+    chown system /sys/kernel/debug/tegra_hotplug/min_cpus
+    chmod 0660 /sys/kernel/debug/tegra_hotplug/min_cpus
+    chown system /sys/htc/power_save
+    chown system /sys/kernel/debug/tegra_emc/eack_state
 
 # Radio signal
 	chown radio radio /sys/class/power_supply/battery/charger_control
@@ -178,19 +190,25 @@ on boot
 
 # Power management settings
     write /sys/module/cpu_tegra3/parameters/no_lp 0
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor interactive
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor interactive
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor interactive
-    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor interactive
-    write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 30000
-    write /sys/devices/system/cpu/cpufreq/interactive/timer_rate 20000
-    write /sys/devices/system/cpu/cpufreq/interactive/boost_factor 2
-    write /sys/devices/system/cpu/cpufreq/interactive/input_boost 1
-    write /sys/devices/system/cpu/cpufreq/interactive/sustain_load 80
-    write /sys/devices/system/cpu/cpufreq/interactive/go_highspeed_load 80
-    write /sys/devices/system/cpu/cpufreq/interactive/go_maxspeed_load 80
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor ondemand
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor ondemand
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor ondemand
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor ondemand
+    chown system /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate_min
+    chown system /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
+    chown system /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate_max
+    chown system /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor
+    chown system /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy
+    chown system /sys/devices/system/cpu/cpufreq/ondemand/up_threshold
+    chown system /sys/devices/system/cpu/cpufreq/ondemand/touch_poke
+    chown system /sys/htc/power_save
+    write /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate_min 10000
+    write /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate 50000
+    write /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor 4
+    write /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy 1
+    write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold 90
     write /sys/module/cpu_tegra3/parameters/auto_hotplug 1
-    write /sys/module/cpuidle/parameters/lp2_in_idle 0
+    write /sys/module/cpuidle/parameters/lp2_in_idle 1
 	
 # fuse
 	chmod 0444 /sys/firmware/fuse/odm_production_mode
