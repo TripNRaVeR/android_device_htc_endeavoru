@@ -8,6 +8,11 @@ on early-init
     mkdir /storage/sdcard0 0000 system system
     symlink /storage/sdcard0 /sdcard
     symlink /storage/sdcard0 /mnt/sdcard
+	
+	# create directory for mounting usb drives (otg)
+	mkdir /storage/usbdisk 0666 system system
+	symlink /storage/usbdisk /mnt/usbdisk
+	symlink /mnt/usbdisk /usbdisk
 
 on fs
 	setprop ro.crypto.umount_sd false
