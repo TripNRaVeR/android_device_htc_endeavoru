@@ -8,7 +8,6 @@ on early-init
     mkdir /storage/sdcard0 0000 system system
     symlink /storage/sdcard0 /sdcard
     symlink /storage/sdcard0 /mnt/sdcard
-    mkdir /mnt/usb 0000 system system
 
 on fs
 	setprop ro.crypto.umount_sd false
