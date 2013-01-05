@@ -83,28 +83,26 @@ on boot
 	chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/state
 	chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/type
 	
-# nv-tegra cpu stuff
-    chown system /sys/module/edp/parameters/edp_ap_limit
-    chown system /sys/module/edp/parameters/edp_limits_table
-    chown system /sys/devices/system/cpu/cpufreq/ondemand/touch_poke
-    chown system /sys/devices/system/cpu/cpu_on
-    chown system /sys/kernel/debug/tegra_hotplug/min_cpus
-    chown system /sys/kernel/debug/tegra_hotplug/max_cpus
-    chown system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-    chown system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
-    chown system /sys/module/cpu_tegra3/parameters/auto_hotplug
-    chown system /sys/devices/system/cpu/cpu1/online
-    chown system /sys/devices/system/cpu/cpu2/online
-    chown system /sys/devices/system/cpu/cpu3/online
-    chown system /sys/module/cpu_tegra3/parameters/mp_policy
-    chown system /sys/module/cpu_tegra3/parameters/NwNs
-    chown system /sys/module/cpu_tegra3/parameters/TwTs
-    chown system /sys/module/cpu_tegra/parameters/cpu_user_cap
-    chown radio radio /sys/module/cpu_tegra/parameters/ril_boost
-    chown system /sys/kernel/debug/tegra_hotplug/min_cpus
-    chmod 0660 /sys/kernel/debug/tegra_hotplug/min_cpus
-    chown system /sys/htc/power_save
-    chown system /sys/kernel/debug/tegra_emc/eack_state
+# common cpu stuff
+	chown system /sys/kernel/debug/tegra_hotplug/min_cpus
+	chown system /sys/kernel/debug/tegra_hotplug/max_cpus
+	chown system /sys/kernel/debug/tegra_hotplug/core_bias
+	chown system /sys/kernel/debug/tegra_hotplug/stats
+	chown system /sys/kernel/debug/tegra_emc/eack_state
+	chown system /sys/devices/system/cpu/cpu0/online
+	chown system /sys/devices/system/cpu/cpu1/online
+	chown system /sys/devices/system/cpu/cpu2/online
+	chown system /sys/devices/system/cpu/cpu3/online
+# cpu tegra stuff
+	chown system system /sys/module/cpu_tegra/parameters/cpu_user_cap
+	chown radio radio /sys/module/cpu_tegra/parameters/ril_boost
+# cpu tegra 3 stuff
+	chown system /sys/module/cpu_tegra3/parameters/auto_hotplug
+	chown system /sys/module/cpu_tegra3/parameters/balance_level
+
+# tegra edp stuff
+	chown system /sys/module/edp/parameters/edp_ap_limit
+	chown system /sys/module/edp/parameters/edp_limits_table
 
 # Radio signal
 	chown radio radio /sys/class/power_supply/battery/charger_control
@@ -147,6 +145,10 @@ on boot
 # graphics
     chown system system /sys/class/graphics/fb0/device/nvdps
 
+# smartdimmer
+	chown system system /sys/class/graphics/fb0/device/smartdimmer/enable
+	chown system system /sys/class/graphics/fb0/device/smartdimmer/aggressiveness
+
 # backlight
     chown system system /sys/class/backlight/tegra-pwm-bl/brightness
 
@@ -155,15 +157,17 @@ on boot
     chown system system /sys/class/leds/green/blink
     chown system system /sys/class/leds/amber/brightness
     chown system system /sys/class/leds/amber/blink
-	
-# power
-    chown system system /sys/kernel/tegra_cap/core_cap_level
-    chown system system /sys/kernel/tegra_cap/core_cap_state
-    chown system system /sys/module/cpu_tegra/parameters/cpu_user_cap
+
+# power management
+	chown system system /sys/kernel/tegra_cap/cbus_cap_level
+	chown system system /sys/kernel/tegra_cap/cbus_cap_state
+	chown system system /sys/kernel/tegra_cap/core_cap_level
+	chown system system /sys/kernel/tegra_cap/core_cap_state
 
 # HTC permission fix
     chown system system /sys/htc/media_boost_freq
     chown system system /sys/htc/cpu_temp
+	chown system system /sys/htc/power_save
     chown system system /proc/emmc_burst
 
 # BB remote file system
@@ -192,28 +196,16 @@ on boot
     write /proc/sys/net/ipv6/conf/rmnet1/accept_ra 2
     write /proc/sys/net/ipv6/conf/rmnet2/accept_ra 2
 
-# Power management settings
-    write /sys/module/cpu_tegra3/parameters/no_lp 0
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor ondemand
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor ondemand
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor ondemand
-    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor ondemand
-    chown system /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate_min
-    chown system /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
-    chown system /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate_max
-    chown system /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor
-    chown system /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy
-    chown system /sys/devices/system/cpu/cpufreq/ondemand/up_threshold
-    chown system /sys/devices/system/cpu/cpufreq/ondemand/touch_poke
-    chown system /sys/htc/power_save
-    write /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate_min 10000
-    write /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate 50000
-    write /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor 4
-    write /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy 1
-    write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold 90
-    write /sys/module/cpu_tegra3/parameters/auto_hotplug 1
-    write /sys/module/cpuidle/parameters/lp2_in_idle 1
-	
+# cpu settings
+	write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor interactive
+	write /sys/devices/system/cpu/cpufreq/interactive/timer_rate 50000
+	write /sys/devices/system/cpu/cpufreq/interactive/go_maxspeed_load 80
+	write /sys/devices/system/cpu/cpufreq/interactive/boost_factor 2
+	write /sys/devices/system/cpu/cpufreq/interactive/io_is_busy 1
+	write /sys/devices/system/cpu/cpufreq/interactive/max_boost 0
+	write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 60000
+	write /sys/devices/system/cpu/cpufreq/interactive/sustain_load 80
+
 # fuse
 	chmod 0444 /sys/firmware/fuse/odm_production_mode
 
@@ -342,23 +334,24 @@ service chown_nvs_wlan0 /system/bin/chown system.wifi /data/misc/wifi/wl1271-nvs
 # WIFI_END
 
 # start call volume stuff
-    start pollyd
+	start pollyd
 
 # Prepare TF service
 service tf_daemon /system/bin/tf_daemon -storageDir /data/tf -d
-    class main
-    user root
-    group shell
-    disabled
-    oneshot
+	class main
+	user root
+	group shell
+	disabled
+	oneshot
 
 # Create data directory and start service
 on property:tf.enable=y
-    mkdir /data/tf
-    start tf_daemon
+	mkdir /data/tf
+	start tf_daemon
 
 on property:init.svc.bootanim=stopped
-    write /sys/kernel/debug/tegra_hotplug/max_cpus 4
+	write /sys/kernel/debug/tegra_hotplug/max_cpus 4
+	write /sys/module/cpu_tegra3/parameters/auto_hotplug 1
 
 
 # Create filesystems if necessary

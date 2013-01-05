@@ -295,21 +295,24 @@ on boot
     chmod 0660 /sys/power/wake_lock
     chmod 0660 /sys/power/wake_unlock
 
-    chown system system /sys/devices/system/cpu/cpufreq/interactive/timer_rate
-    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/timer_rate
-    chown system system /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
-    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
-    chown system system /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
-    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
-    chown system system /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
-    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
-    chown system system /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
-    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
-    chown system system /sys/devices/system/cpu/cpufreq/interactive/boost
-    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/boost
-    chown system system /sys/devices/system/cpu/cpufreq/interactive/boostpulse
-    chown system system /sys/devices/system/cpu/cpufreq/interactive/input_boost
-    chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/input_boost
+	chown system system /sys/devices/system/cpu/cpufreq/interactive/boost_factor
+	chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/boost_factor
+	chown system system /sys/devices/system/cpu/cpufreq/interactive/go_maxspeed_load
+	chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/go_maxspeed_load
+	chown system system /sys/devices/system/cpu/cpufreq/interactive/high_freq_min_delay
+	chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/high_freq_min_delay
+	chown system system /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
+	chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
+	chown system system /sys/devices/system/cpu/cpufreq/interactive/max_boost
+	chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/max_boost
+	chown system system /sys/devices/system/cpu/cpufreq/interactive/max_normal_freq
+	chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/max_normal_freq
+	chown system system /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
+	chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
+	chown system system /sys/devices/system/cpu/cpufreq/interactive/sustain_load
+	chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/sustain_load
+	chown system system /sys/devices/system/cpu/cpufreq/interactive/timer_rate
+	chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/timer_rate
 
     # Assume SMP uses shared cpufreq policy for all CPUs
     chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
