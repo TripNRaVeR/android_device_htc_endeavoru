@@ -252,8 +252,8 @@ on post-fs-data
 
 # sysinit
 service sysinit /system/bin/sysinit
-    user root
-    oneshot
+	user root
+	oneshot
 
 on boot
 # basic network init
@@ -275,8 +275,8 @@ on boot
     chmod 0664 /sys/module/lowmemorykiller/parameters/minfree
 
     # Tweak background writeout
-    write /proc/sys/vm/dirty_expire_centisecs 200
-    write /proc/sys/vm/dirty_background_ratio 5
+	write /proc/sys/vm/dirty_expire_centisecs 200
+	write /proc/sys/vm/dirty_background_ratio 5
 	# TripNDroid set to mode 3
 	write /proc/sys/vm/drop_caches 3
 
@@ -487,6 +487,8 @@ service ril-daemon /system/bin/rild
     class main
     socket rild stream 660 root radio
     socket rild-debug stream 660 radio system
+	socket rild-audio-gsm stream 660 radio system
+	socket rild-audio stream 660 radio audio
 	socket rild-agps stream 660 radio system
     user root
     group radio cache inet misc audio sdcard_r sdcard_rw log
@@ -575,17 +577,17 @@ service mdnsd /system/bin/mdnsd
     oneshot
 
 service uim /system/bin/uim-sysfs
-    class main
+	class main
 	user root
 	group media bluetooth
-    oneshot
+	oneshot
 	
 # Compcache - handle at boot
 service compcache /system/bin/handle_compcache
-    class main
-    user root
-    group root
-    oneshot
+	class main
+	user root
+	group root
+	oneshot
 	
 # adb over network
 on property:service.adb.tcp.port=5555
