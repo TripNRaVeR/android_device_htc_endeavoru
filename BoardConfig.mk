@@ -106,6 +106,7 @@ WIFI_DRIVER_MODULE_NAME          := "wl12xx_sdio"
 #WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/wlcore_sdio.ko"
 #WIFI_DRIVER_MODULE_NAME          := "wlcore_sdio"
 WIFI_FIRMWARE_LOADER             := ""
+BOARD_LEGACY_NL80211_STA_EVENTS  := true
 USES_TI_MAC80211 		 := true
 COMMON_GLOBAL_CFLAGS += -DUSES_TI_MAC80211
 
