@@ -57,7 +57,6 @@ PRODUCT_PACKAGES += \
 	dhcpcd.conf \
         TQS_D_1.7.ini \
         regulatory.bin \
-	calibrator \
 	hostapd.conf
 
 # Modules
