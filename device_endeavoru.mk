@@ -122,6 +122,10 @@ PRODUCT_PACKAGES += \
 	setup_fs \
 	com.android.future.usb.accessory
 
+# Stagefright
+PRODUCT_PACKAGES += \
+	libstagefrighthw
+
 # Additional
 PRODUCT_PACKAGES += \
 	Torch \
