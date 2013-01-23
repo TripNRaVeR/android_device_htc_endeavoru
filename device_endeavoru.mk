@@ -62,7 +62,6 @@ PRODUCT_PACKAGES += \
 # Modules
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/modules/baseband-xmm-power2.ko:system/lib/modules/baseband-xmm-power2.ko \
-    $(LOCAL_PATH)/prebuilt/modules/cdc-acm.ko:system/lib/modules/cdc-acm.ko \
     $(LOCAL_PATH)/prebuilt/modules/scsi_wait_scan.ko:system/lib/modules/scsi_wait_scan.ko \
     $(LOCAL_PATH)/prebuilt/modules/tty_hci.ko:system/lib/modules/tty_hci.ko \
     $(LOCAL_PATH)/prebuilt/modules/uhid.ko:system/lib/modules/uhid.ko \
