@@ -67,7 +67,6 @@ BOARD_HAVE_HTC_FFC := true
 
 # Misc settings
 ARCH_ARM_HAVE_32_BYTE_CACHE_LINES := true
-BOARD_BATTERY_DEVICE_NAME := "htc_battery"
 BOARD_USES_SECURE_SERVICES := true
 
 # WebKit
