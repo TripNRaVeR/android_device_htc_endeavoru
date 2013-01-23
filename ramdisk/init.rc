@@ -299,6 +299,8 @@ on boot
 	chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/boost_factor
 	chown system system /sys/devices/system/cpu/cpufreq/interactive/go_maxspeed_load
 	chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/go_maxspeed_load
+	chown system system /sys/devices/system/cpu/cpufreq/interactive/midrange_go_maxspeed_load
+	chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/midrange_go_maxspeed_load
 	chown system system /sys/devices/system/cpu/cpufreq/interactive/high_freq_min_delay
 	chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/high_freq_min_delay
 	chown system system /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
