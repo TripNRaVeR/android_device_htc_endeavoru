@@ -20,6 +20,9 @@
 # Refer to the input device configuration documentation for more details.
 #
 
+# Internal touchscreen
+device.internal = 1
+
 # Basic Parameters
 touch.deviceType = touchScreen
 touch.orientationAware = 1
