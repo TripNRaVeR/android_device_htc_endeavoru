@@ -27,6 +27,8 @@ ro.fat_rsvd=66
 ro.sf.lcd_density=320
 drm.service.enabled=false
 ro.vold.umsdirtyratio=20
+persist.sys.usb.config=mass_storage,adb
+persist.service.adb.enable=1
 #
 # PERFORMANCE
 dalvik.vm.execution-mode=int:jit
