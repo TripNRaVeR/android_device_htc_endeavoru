@@ -141,14 +141,15 @@ on boot
 
 #GPS
     setprop ro.gps.supl.supported true
-    mkdir /data/tigps
-    mkdir /data/tigps/aiding
-    mkdir /data/tigps/etc
-    mkdir /data/tigps/logs
-    mkdir /data/RXN
-    mkdir /data/RXN/RXN
-    mkdir /data/RXN/RXN/pred
-    chmod 777 /system/bin/RXN_IntApp
+    mkdir /data/tigps 0770 system system
+    mkdir /data/tigps/aiding 0770 system system
+    mkdir /data/tigps/logs 0770 system system
+    mkdir /data/tigps/etc 0770 system system
+    mkdir /data/RXN 0770 system system
+    mkdir /data/RXN/RXN 0770 system system
+    mkdir /data/RXN/RXN/pred 0770 system system
+	chmod 0755 /system/bin/RXN_IntApp
+	chmod 0770 /system/etc/gps/tigpsrouter
 
 # I/O sched permissions
     chown system system /sys/block/mmcblk0/queue/scheduler
@@ -262,19 +263,26 @@ service uim /system/bin/uim-sysfs
 
 service nav /system/bin/navl_server --android_log NAVD-p3 -nav\"-c/system/etc/pathconfigfile.txt\"
     class main
-    user root
-    oneshot
+    user system
+    group system
+	oneshot
 
 service rxn_intapp /system/bin/RXN_IntApp /system/etc/gps/RXN/MSLConfig.txt
     class main
-
+    user system
+    group system
+	
 service rilPos-daemon /system/bin/rilposd -l /system/lib/librilpos.so -- -c agps_v_channel
     class main
+    user system
+    group system radio
     disabled
     oneshot
 
 service cplc_main /system/bin/cplc_main
     class main
+    user system
+    group system radio
     disabled
     oneshot
 

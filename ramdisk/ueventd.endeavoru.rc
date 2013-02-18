@@ -38,6 +38,7 @@
 /dev/video0     0660    media   camera
 /dev/video1     0660    media   camera
 /dev/tf_driver	0666	system	system
+/dev/tigps				0640    system	system
 /dev/codec_aic3008     0660    system   audio
 /dev/ewtzmu2daemon        0666   system     system
 /dev/ewtzmu2hal		  0666   system     system
