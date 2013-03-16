@@ -5,7 +5,6 @@ on early-init
 on init
     # For backwards compatibility
     export EXTERNAL_STORAGE /storage/sdcard0
-    mkdir /storage 0550 system sdcard_r
     mkdir /storage/sdcard0 0000 system system
     symlink /storage/sdcard0 /sdcard
     symlink /storage/sdcard0 /mnt/sdcard
@@ -29,6 +28,24 @@ on fs
     start pollyd
 
 on post-fs-data
+
+# bluetooth
+    # UART device
+    chmod 0660 /dev/ttyHS2
+    chown bluetooth net_bt_stack /dev/ttyHS2
+
+    # bluetooth power up/down interface
+    chmod 0660 /sys/class/rfkill/rfkill0/state
+    chmod 0660 /sys/class/rfkill/rfkill0/type
+    chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/state
+    chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/type
+
+    # bluetooth MAC address programming
+    chown bluetooth net_bt_stack ro.bt.bdaddr_path
+    chown bluetooth net_bt_stack /system/etc/bluetooth
+    chown bluetooth net_bt_stack /data/misc/bluetooth
+    setprop ro.bt.bdaddr_path "/data/misc/bluetooth/bdaddr"
+
     # change back to bluetooth from system
     chown bluetooth net_bt_stack /data/misc/bluetooth
 
@@ -51,10 +68,9 @@ on boot
 # tegra permissions
     chown system /sys/module/edp/parameters/edp_ap_limit
     chown system /sys/devices/system/cpu/cpu_on
-    chown system /sys/kernel/debug/tegra_hotplug/min_cpus
-    chown system /sys/kernel/debug/tegra_hotplug/max_cpus
     chown system /sys/kernel/debug/tegra_emc/eack_state
-    chown system /sys/kernel/debug/tegra_hotplug/min_cpus
+    chown system /sys/kernel/tegra_cap/cbus_cap_level
+    chown system /sys/kernel/tegra_cap/cbus_cap_state
     chown system /sys/kernel/tegra_cap/core_cap_level
     chown system /sys/kernel/tegra_cap/core_cap_state
     chown system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
@@ -64,19 +80,10 @@ on boot
     chown system /sys/devices/system/cpu/cpu1/online
     chown system /sys/devices/system/cpu/cpu2/online
     chown system /sys/devices/system/cpu/cpu3/online
-    chown system /sys/module/cpu_tegra3/parameters/auto_hotplug
-    chown system /sys/module/cpu_tegra3/parameters/balance_level
-    chown system /sys/module/cpu_tegra3/parameters/idle_bottom_freq
-    chown system /sys/module/cpu_tegra3/parameters/idle_top_freq
-    chown system /sys/module/cpu_tegra/parameters/cpu_user_cap
     chown system /sys/htc/power_save
-
-    chmod 0660 /sys/kernel/debug/tegra_hotplug/min_cpus
 
 # tegra 3
     write /sys/module/cpu_tegra3/parameters/no_lp 0
-    write /sys/module/cpu_tegra3/parameters/auto_hotplug 1
-	write /sys/kernel/debug/tegra_hotplug/max_cpus 4
 
 # cpuidle
     write /sys/module/cpuidle/parameters/lp2_in_idle 1
@@ -95,9 +102,8 @@ on boot
 
 # governor settings
     write /sys/devices/system/cpu/cpufreq/interactive/boost_factor 2
-    write /sys/devices/system/cpu/cpufreq/interactive/input_boost 1
-    write /sys/devices/system/cpu/cpufreq/interactive/sustain_load 80
 	write /sys/devices/system/cpu/cpufreq/interactive/io_is_busy 1
+	write /sys/devices/system/cpu/cpufreq/interactive/sustain_load 80
 
 # for radio signal stable
     chown radio radio /sys/class/power_supply/battery/charger_control
@@ -111,7 +117,7 @@ on boot
     chown radio system /sys/camera_led_status/led_ril_status
     chown system system /sys/camera_led_status/led_wimax_status
     chown system system /sys/camera_led_status/led_hotspot_status
-    chown system system /sys/class/leds/flashlight/brightness
+    chown system camera /sys/class/leds/flashlight/brightness
     chmod 0660 /sys/class/leds/flashlight/brightness
 
 # htc
@@ -121,23 +127,6 @@ on boot
 # Define DATA USAGE CTRL file permission
     chown system system /proc/net/xt_qtaguid/ctrl
     chmod 0666 /proc/net/xt_qtaguid/ctrl
-
-# bluetooth
-    # UART device
-    chmod 0660 /dev/ttyHS2
-    chown bluetooth 3008 /dev/ttyHS2
-
-    # bluetooth power up/down interface
-    chmod 0660 /sys/class/rfkill/rfkill0/state
-    chmod 0660 /sys/class/rfkill/rfkill0/type
-    chown bluetooth 3008 /sys/class/rfkill/rfkill0/state
-    chown bluetooth 3008 /sys/class/rfkill/rfkill0/type
-
-    # bluetooth MAC address programming
-    chown bluetooth 3008 ro.bt.bdaddr_path
-    chown bluetooth 3008 /system/etc/bluetooth
-    chown bluetooth 3008 /data/misc/bluetooth
-    setprop ro.bt.bdaddr_path "/data/misc/bluetooth/bdaddr"
 
 #GPS
     setprop ro.gps.supl.supported true
@@ -221,8 +210,8 @@ on boot
     write /proc/sys/net/ipv6/conf/rmnet2/accept_ra 2
 
 # Increase read ahead size of mmc block devices
-    write /sys/block/mmcblk0/queue/read_ahead_kb 2048
-    write /sys/block/mmcblk1/queue/read_ahead_kb 2048
+    write /sys/block/mmcblk0/queue/read_ahead_kb 4096
+    write /sys/block/mmcblk1/queue/read_ahead_kb 4096
 
 # DRM change
     mkdir /data/DxDrm
@@ -230,10 +219,10 @@ on boot
     chmod 555 /data/DxDrm
 
 # set governor
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor interactive
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor interactive
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor interactive
-    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor interactive
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor tripndroid
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor tripndroid
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor tripndroid
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor tripndroid
 
 # audio
     mkdir /data/audio 0775 media audio
