@@ -65,6 +65,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/modules/scsi_wait_scan.ko:system/lib/modules/scsi_wait_scan.ko \
     $(LOCAL_PATH)/prebuilt/modules/tty_hci.ko:system/lib/modules/tty_hci.ko \
     $(LOCAL_PATH)/prebuilt/modules/uhid.ko:system/lib/modules/uhid.ko \
+    $(LOCAL_PATH)/prebuilt/modules/raw_ip_net.ko:system/lib/modules/raw_ip_net.ko \
     $(LOCAL_PATH)/prebuilt/modules/wl12xx.ko:system/lib/modules/wl12xx.ko \
     $(LOCAL_PATH)/prebuilt/modules/wl12xx_sdio.ko:system/lib/modules/wl12xx_sdio.ko
 
