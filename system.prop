@@ -30,6 +30,7 @@ ro.vold.umsdirtyratio=50
 persist.sys.usb.config=mass_storage,adb
 persist.service.adb.enable=1
 ro.kernel.android.checkjni=0
+ro.config.nocheckin=1
 #
 # PERFORMANCE
 dalvik.vm.execution-mode=int:jit
