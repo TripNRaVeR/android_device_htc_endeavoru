@@ -53,6 +53,7 @@ PRODUCT_COPY_FILES += \
 
 # Wifi
 PRODUCT_PACKAGES += \
+	lib_driver_cmd_wl12xx \
 	dhcpcd.conf \
         TQS_D_1.7.ini \
         regulatory.bin \
