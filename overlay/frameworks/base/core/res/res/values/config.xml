@@ -219,9 +219,6 @@
 	<item>/dev/ttyHS2</item>
     </string-array>
 
-    <!--  Number of supported users -->
-    <integer name="config_multiuserMaximumUsers">6</integer>
-
     <!-- Disable safe headphone volume -->
     <bool name="config_safe_media_volume_enabled">false</bool>
 
