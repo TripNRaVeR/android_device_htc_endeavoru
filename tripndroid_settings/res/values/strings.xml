@@ -2,6 +2,10 @@
 <resources>
     <string name="app_name">TripNDroid Settings</string>
 
+    <string name="category_tdf_title">TripNDroid Framework</string>
+    <string name="powersaving_active_title_head">Powersaving mode</string>
+    <string name="powersaving_active_summary_head">Use TDF powersaving mode to save power and still use the device properly</string>
+
     <string name="category_s2w_title">Sweep2Wake</string>
     <string name="s2w_switch_title_head">Enable</string>
     <string name="s2w_switch_summary_head">Switch phone screen on/off with a swipe over the capacitive buttons</string>

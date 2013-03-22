@@ -9,6 +9,7 @@ public class Startup extends BroadcastReceiver {
     @Override
     public void onReceive(final Context context, final Intent bootintent) {
         Sweep2WakeSwitch.restore(context);
+        PowerSavingActive.restore(context);
         Fastcharge.restore(context);
         BacklightDisable.restore(context);
         BacklightNotificationSwitch.restore(context);

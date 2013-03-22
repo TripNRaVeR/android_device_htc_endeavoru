@@ -19,6 +19,7 @@ public class DeviceSettings extends PreferenceActivity  {
     public static final String KEY_BACKLIGHTDISABLE = "backlight_disable";
     public static final String KEY_BACKLIGHTNOTIFICATION = "backlight_notification";
     public static final String KEY_SMARTDIMMERSWITCH = "smartdimmer_switch";
+    public static final String KEY_POWERSAVINGACTIVE = "powersave_active";
 
     private TwoStatePreference mS2WSwitch;
     private ListPreference mS2WStroke;
@@ -26,6 +27,7 @@ public class DeviceSettings extends PreferenceActivity  {
     private TwoStatePreference mFastcharge;
     private TwoStatePreference mBacklightDisable;
     private TwoStatePreference mBacklightNotification;
+    private TwoStatePreference mPowerSavingActive;
     private TwoStatePreference mSmartDimmerSwitch;
 
 
@@ -49,6 +51,10 @@ public class DeviceSettings extends PreferenceActivity  {
         mBacklightNotification = (TwoStatePreference) findPreference(KEY_BACKLIGHTNOTIFICATION);
         mBacklightNotification.setEnabled(BacklightNotificationSwitch.isSupported());
         mBacklightNotification.setOnPreferenceChangeListener(new BacklightNotificationSwitch());
+
+        mPowerSavingActive = (TwoStatePreference) findPreference(KEY_POWERSAVINGACTIVE);
+        mPowerSavingActive.setEnabled(PowerSavingActive.isSupported());
+        mPowerSavingActive.setOnPreferenceChangeListener(new PowerSavingActive());
 
         mSmartDimmerSwitch = (TwoStatePreference) findPreference(KEY_SMARTDIMMERSWITCH);
         mSmartDimmerSwitch.setEnabled(SmartDimmerSwitch.isSupported());

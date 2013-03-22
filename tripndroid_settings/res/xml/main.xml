@@ -3,6 +3,16 @@
 	<!-- defaultValues need to be in sync with the default kernel values! -->
 
 	<PreferenceCategory
+    	android:title="@string/category_tdf_title">
+	    <!-- tdf Options -->
+	    <CheckBoxPreference
+	        android:key="powersave_active"
+	        android:title="@string/powersaving_active_title_head"
+	        android:summary="@string/powersaving_active_summary_head"
+	        android:defaultValue="0" />
+	</PreferenceCategory>
+
+	<PreferenceCategory
     	android:title="@string/category_s2w_title">
 	    <!-- s2w switch Options -->
 	    <CheckBoxPreference
