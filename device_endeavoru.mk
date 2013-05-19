@@ -29,7 +29,6 @@ DEVICE_PACKAGE_OVERLAYS := $(LOCAL_PATH)/overlay
 # if the xhdpi doesn't exist.
 PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
-PRODUCT_LOCALES += xhdpi
 
 # Files needed for boot image
 PRODUCT_COPY_FILES += \
