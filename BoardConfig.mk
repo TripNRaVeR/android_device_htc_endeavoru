@@ -136,6 +136,8 @@ BOARD_VOLD_MAX_PARTITIONS := 20
 BOARD_SDCARD_INTERNAL_DEVICE := /dev/block/mmcblk0p14
 BOARD_HAS_SDCARD_INTERNAL := true
 
+ADDITIONAL_DEFAULT_PROPERTIES += ro.allow.mock.location=1
+
 # Try to build the kernel
 TARGET_KERNEL_SOURCE := kernel/htc/endeavoru
 TARGET_KERNEL_CONFIG := tripndroid_jb_defconfig
