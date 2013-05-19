@@ -147,6 +147,8 @@
         <item>0</item>
     </integer-array>
 
+    <integer name="config_radioScanningTimeout">0</integer>
+
     <!-- Boolean indicating whether the wifi chipset has dual frequency band support -->
     <bool translatable="false" name="config_wifi_dual_band_support">true</bool>
 
