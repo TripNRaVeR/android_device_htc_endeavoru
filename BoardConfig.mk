@@ -51,7 +51,7 @@ TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp -ffast-math
 TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp -ffast-math
 TARGET_EXTRA_CFLAGS += $(call cc-option, -mtune=cortex-a9 -mcpu=cortex-a9 -march=armv7-a-neon -ffast-math)
 
-# ICS drivers
+# Common CFLAGS
 COMMON_GLOBAL_CFLAGS += -DICS_AUDIO_BLOB -DMR0_CAMERA_BLOB -DDISABLE_HW_ID_MATCH_CHECK -D__ARM_CACHE_LINE_SIZE=32
 COMMON_GLOBAL_CFLAGS += -DHTCLOG -DHTC_CAMERA_HARDWARE
 
