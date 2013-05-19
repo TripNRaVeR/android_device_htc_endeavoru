@@ -194,6 +194,9 @@
     <!-- Is the notification LED intrusive? -->
     <bool name="config_intrusiveNotificationLed">true</bool>
 
+    <!-- default notification LED color -->
+    <color name="config_defaultNotificationColor">#ff00ff00</color>
+
     <bool name="config_ui_enableFadingMarquee">true</bool>
 
     <bool name="config_sf_slowBlur">true</bool>
