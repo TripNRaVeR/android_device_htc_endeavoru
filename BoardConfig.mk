@@ -94,6 +94,7 @@ TARGET_PROVIDES_LIBRIL := vendor/htc/endeavoru/proprietary/lib/libhtc-ril.so
 
 # Connectivity - Wi-Fi
 WIFI_BAND 			 := 802_11_ABGN
+PRODUCT_WIRELESS_TOOLS := true
 BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
 WPA_SUPPLICANT_VERSION           := VER_0_8_X
 BOARD_HOSTAPD_DRIVER             := NL80211
