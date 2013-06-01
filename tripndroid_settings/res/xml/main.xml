@@ -12,6 +12,13 @@
 	        android:defaultValue="0" />
 	</PreferenceCategory>
 
+	    <CheckBoxPreference
+	        android:key="ts_fix"
+	        android:title="@string/ts_fix_title_head"
+	        android:summary="@string/ts_fix_summary_head"
+	        android:defaultValue="1" />
+	</PreferenceCategory>
+
 	<PreferenceCategory
     	android:title="@string/category_s2w_title">
 	    <!-- s2w switch Options -->

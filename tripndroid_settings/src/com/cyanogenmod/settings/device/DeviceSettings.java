@@ -20,6 +20,7 @@ public class DeviceSettings extends PreferenceActivity  {
     public static final String KEY_BACKLIGHTNOTIFICATION = "backlight_notification";
     public static final String KEY_SMARTDIMMERSWITCH = "smartdimmer_switch";
     public static final String KEY_POWERSAVINGACTIVE = "powersave_active";
+    public static final String KEY_TSFIX = "ts_fix";
 
     private TwoStatePreference mS2WSwitch;
     private ListPreference mS2WStroke;
@@ -29,6 +30,7 @@ public class DeviceSettings extends PreferenceActivity  {
     private TwoStatePreference mBacklightNotification;
     private TwoStatePreference mPowerSavingActive;
     private TwoStatePreference mSmartDimmerSwitch;
+    private TwoStatePreference mTsFix;
 
 
     @Override
@@ -59,6 +61,10 @@ public class DeviceSettings extends PreferenceActivity  {
         mSmartDimmerSwitch = (TwoStatePreference) findPreference(KEY_SMARTDIMMERSWITCH);
         mSmartDimmerSwitch.setEnabled(SmartDimmerSwitch.isSupported());
         mSmartDimmerSwitch.setOnPreferenceChangeListener(new SmartDimmerSwitch());
+
+	mTsFix = (TwoStatePreference) findPreference(KEY_TSFIX);
+	mTsFix.setEnabled(TsFix.isSupported());
+	mTsFix.setOnPreferenceChangeListener(new TsFix());
 
     }
 

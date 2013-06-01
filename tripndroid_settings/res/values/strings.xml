@@ -6,6 +6,9 @@
     <string name="powersaving_active_title_head">Powersaving mode</string>
     <string name="powersaving_active_summary_head">Use TDF powersaving mode to save power and still use the device properly</string>
 
+    <string name="ts_fix_title_head">Touchscreen fix</string>
+    <string name="ts_fix_summary_head">Enable or disable the tdf touchscreen multitouch fix</string>
+
     <string name="category_s2w_title">Sweep2Wake</string>
     <string name="s2w_switch_title_head">Enable</string>
     <string name="s2w_switch_summary_head">Switch phone screen on/off with a swipe over the capacitive buttons</string>

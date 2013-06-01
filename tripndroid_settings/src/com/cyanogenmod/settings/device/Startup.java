@@ -14,5 +14,6 @@ public class Startup extends BroadcastReceiver {
         BacklightDisable.restore(context);
         BacklightNotificationSwitch.restore(context);
         SmartDimmerSwitch.restore(context);
+	TsFix.restore(context);
     }
 }
