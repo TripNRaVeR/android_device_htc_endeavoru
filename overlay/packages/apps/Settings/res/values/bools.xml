@@ -19,4 +19,6 @@
     <bool name="has_dock_settings">true</bool>
     <!-- Flash light toggle -->
     <bool name="has_led_flash">true</bool>
+    <!-- volume wake -->
+    <bool name="config_show_volumeRockerWake">true</bool>
 </resources>
