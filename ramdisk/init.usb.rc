@@ -38,7 +38,7 @@ on property:sys.usb.config=mass_storage,adb
 # USB accessory configuration
 on property:sys.usb.config=accessory
     write /sys/class/android_usb/android0/enable 0
-    write /sys/class/android_usb/android0/idVendor 18d1
+    write /sys/class/android_usb/android0/idVendor 0bb4
     write /sys/class/android_usb/android0/idProduct 2d00
     write /sys/class/android_usb/android0/functions ${sys.usb.config}
     write /sys/class/android_usb/android0/enable 1
@@ -47,7 +47,7 @@ on property:sys.usb.config=accessory
 # USB accessory configuration, with adb
 on property:sys.usb.config=accessory,adb
     write /sys/class/android_usb/android0/enable 0
-    write /sys/class/android_usb/android0/idVendor 18d1
+    write /sys/class/android_usb/android0/idVendor 0bb4
     write /sys/class/android_usb/android0/idProduct 2d01
     write /sys/class/android_usb/android0/functions ${sys.usb.config}
     write /sys/class/android_usb/android0/enable 1
@@ -57,7 +57,7 @@ on property:sys.usb.config=accessory,adb
 # audio accessory configuration
 on property:sys.usb.config=audio_source
     write /sys/class/android_usb/android0/enable 0
-    write /sys/class/android_usb/android0/idVendor 18d1
+    write /sys/class/android_usb/android0/idVendor 0bb4
     write /sys/class/android_usb/android0/idProduct 2d02
     write /sys/class/android_usb/android0/functions ${sys.usb.config}
     write /sys/class/android_usb/android0/enable 1
@@ -66,7 +66,7 @@ on property:sys.usb.config=audio_source
 # audio accessory configuration, with adb
 on property:sys.usb.config=audio_source,adb
     write /sys/class/android_usb/android0/enable 0
-    write /sys/class/android_usb/android0/idVendor 18d1
+    write /sys/class/android_usb/android0/idVendor 0bb4
     write /sys/class/android_usb/android0/idProduct 2d03
     write /sys/class/android_usb/android0/functions ${sys.usb.config}
     write /sys/class/android_usb/android0/enable 1
@@ -76,7 +76,7 @@ on property:sys.usb.config=audio_source,adb
 # USB and audio accessory configuration
 on property:sys.usb.config=accessory,audio_source
     write /sys/class/android_usb/android0/enable 0
-    write /sys/class/android_usb/android0/idVendor 18d1
+    write /sys/class/android_usb/android0/idVendor 0bb4
     write /sys/class/android_usb/android0/idProduct 2d04
     write /sys/class/android_usb/android0/functions ${sys.usb.config}
     write /sys/class/android_usb/android0/enable 1
@@ -85,7 +85,7 @@ on property:sys.usb.config=accessory,audio_source
 # USB and audio accessory configuration, with adb
 on property:sys.usb.config=accessory,audio_source,adb
     write /sys/class/android_usb/android0/enable 0
-    write /sys/class/android_usb/android0/idVendor 18d1
+    write /sys/class/android_usb/android0/idVendor 0bb4
     write /sys/class/android_usb/android0/idProduct 2d05
     write /sys/class/android_usb/android0/functions ${sys.usb.config}
     write /sys/class/android_usb/android0/enable 1
