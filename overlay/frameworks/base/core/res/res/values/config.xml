@@ -210,5 +210,8 @@
     <!-- Disable safe headphone volume -->
     <bool name="config_safe_media_volume_enabled">false</bool>
 
+    <!-- Disable search/ assist button menu entry in rebinding section. -->
+    <integer name="config_deviceHardwareKeys">7</integer>
+
 </resources>
 
