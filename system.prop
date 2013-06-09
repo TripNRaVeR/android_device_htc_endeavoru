@@ -41,6 +41,5 @@ debug.nfc.fw_download=true
 debug.nfc.se=true
 #
 # GRAPHICS
-persist.sys.use_dithering=1
 persist.sys.ui.hw=true
 
