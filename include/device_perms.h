@@ -18,6 +18,12 @@
 #define DEVICE_PERMS_H
 
 #define PROPERTY_PERMS_APPEND \
+    { "sys.under_silent_reset.",  AID_RADIO,    0 }, \
+    { "user.language.",  AID_SYSTEM,    0 }, \
+    { "user.region.",  AID_SYSTEM,    0 }, \
+    { "htc.audio.stream.type.",  AID_MEDIA,    0 }, \
+    { "radio.matrace.available.",  AID_RADIO,    0 }, \
+    { "media.tegra.max.out.channels.",  AID_MEDIA,    0 }, \
     { "persist.camera.",  AID_MEDIA,    0 }, \
     { "camera.",          AID_MEDIA,    0 },
 
