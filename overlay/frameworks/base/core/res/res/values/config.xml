@@ -99,7 +99,7 @@
         <item>1700</item>
         <item>2100</item>
         <item>2500</item>
-        <item>3000</item>
+        <item>2800</item>
     </integer-array>
 
     <!-- Array of output values for LCD backlight corresponding to the LUX values
