@@ -199,10 +199,6 @@ on boot
 # GPIO BB access
     chown radio system /sys/class/gpio/gpio32/value
 
-# Increase read ahead size of mmc block devices
-    write /sys/block/mmcblk0/queue/read_ahead_kb 512
-    write /sys/block/mmcblk1/queue/read_ahead_kb 512
-
 # DRM change
     mkdir /data/DxDrm
     mkdir /data/DxDrm/fuse
@@ -245,8 +241,6 @@ service nav /system/bin/navl_server --android_log NAVD-p3 -nav\"-c/system/etc/pa
 
 service rxn_intapp /system/bin/RXN_IntApp /system/etc/gps/RXN/MSLConfig.txt
     class main
-    user system
-    group system
 	
 service rilPos-daemon /system/bin/rilposd -l /system/lib/librilpos.so -- -c agps_v_channel
     class main
@@ -257,8 +251,6 @@ service rilPos-daemon /system/bin/rilposd -l /system/lib/librilpos.so -- -c agps
 
 service cplc_main /system/bin/cplc_main
     class main
-    user system
-    group system radio
     disabled
     oneshot
 
