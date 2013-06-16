@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">TripNDroid Settings</string>
+    <string name="app_name">TDF Setup</string>
 
     <string name="category_tdf_title">TripNDroid Framework</string>
     <string name="powersaving_active_title_head">Powersaving mode</string>
