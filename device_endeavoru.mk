@@ -74,7 +74,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/etc/nvcamera.conf:system/etc/nvcamera.conf
 
 PRODUCT_PACKAGES += \
-	tripndroid_settings
+	tdf_settings
 
 # GPS
 PRODUCT_COPY_FILES += \

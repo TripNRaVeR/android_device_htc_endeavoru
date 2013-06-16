@@ -5,7 +5,7 @@ LOCAL_MODULE_TAGS := optional
 
 LOCAL_SRC_FILES := $(call all-java-files-under, src)
 
-LOCAL_PACKAGE_NAME := tripndroid_settings
+LOCAL_PACKAGE_NAME := tdf_settings
 LOCAL_CERTIFICATE := platform
 
 # Required so that symbols used by the jni library doesn't get stripped out
