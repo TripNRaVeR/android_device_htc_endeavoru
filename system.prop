@@ -34,6 +34,14 @@ ro.config.nocheckin=1
 #
 # PERFORMANCE
 dalvik.vm.execution-mode=int:jit
+#
+# ROM
+ro.device.chipset=nVidia Tegra 3 AP33H
+ro.device.cpu=ARM Cortex-A9 Quadcore @ 1,5Ghz
+ro.device.gpu=nVidia ULP GeForce
+ro.device.front_cam=Samsung s5k6a1gx03 1,3Mpx
+ro.device.rear_cam=Samsung s5k3h2y 8Mpx
+ro.device.screen_res= 4,7" HD 720p touchscreen
 
 #
 # NFC
