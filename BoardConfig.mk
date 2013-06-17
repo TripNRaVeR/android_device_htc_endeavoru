@@ -47,9 +47,9 @@ TARGET_TEGRA_VERSION := t30
 NEED_WORKAROUND_CORTEX_A9_745320 := true
 
 # Flags
-TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp -ffast-math
-TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp -ffast-math
-TARGET_EXTRA_CFLAGS += $(call cc-option, -mtune=cortex-a9 -mcpu=cortex-a9 -march=armv7-a-neon -ffast-math)
+TARGET_GLOBAL_CFLAGS += -mfpu=neon
+TARGET_GLOBAL_CPPFLAGS += -mfpu=neon
+TARGET_EXTRA_CFLAGS += $(call cc-option, -mtune=cortex-a9 -mcpu=cortex-a9 -march=armv7-a-neon -mfpu=neon)
 
 # Common CFLAGS
 COMMON_GLOBAL_CFLAGS += -DICS_AUDIO_BLOB -DMR0_CAMERA_BLOB -DDISABLE_HW_ID_MATCH_CHECK -D__ARM_CACHE_LINE_SIZE=32
