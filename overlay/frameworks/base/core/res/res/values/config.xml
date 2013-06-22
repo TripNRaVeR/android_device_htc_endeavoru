@@ -190,9 +190,6 @@
     <!-- Default blink frequency for notification LED is 2 seconds. -->
     <integer name="config_defaultNotificationLedOff">2000</integer>
 
-    <!-- Is the battery LED intrusive? -->
-    <bool name="config_intrusiveBatteryLed">true</bool>
-
     <!-- Default value for led color when battery is medium charged: 15-69% -->
     <integer name="config_notificationsBatteryMediumARGB">0xFFFFFF00</integer>
 
@@ -214,9 +211,6 @@
 
     <!-- The attenuation in dB applied to the lock/unlock sounds. -->
     <integer name="config_lockSoundVolumeDb">0</integer>
-
-    <!-- Enable screen off animation -->
-    <bool name="config_screenOffAnimation">true</bool>
 
     <!-- animate screen lights needs to be disabled for screen off animation -->
     <bool name="config_animateScreenLights">false</bool>
