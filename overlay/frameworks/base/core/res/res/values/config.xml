@@ -222,5 +222,8 @@
     <!-- Disable search/ assist button menu entry in rebinding section. -->
     <integer name="config_deviceHardwareKeys">7</integer>
 
-</resources>
+    <!-- empty string to disable, or like: /sys/kernel/fast_charge/force_fast_charge
+         it is disabled by default so devices need to add an overlay to enable-->
+    <string name="config_fastChargePath" translatable="false">/sys/td_framework/fast_charge</string>
 
+</resources>
