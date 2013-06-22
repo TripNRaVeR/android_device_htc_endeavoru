@@ -185,6 +185,12 @@
     <!-- Is the battery LED intrusive? -->
     <bool name="config_intrusiveBatteryLed">true</bool>
 
+    <!-- Default value for led color when battery is medium charged: 15-69% -->
+    <integer name="config_notificationsBatteryMediumARGB">0xFFFFFF00</integer>
+
+    <!-- Default value for led color when batter is almost charged: 70-99% -->
+    <integer name="config_notificationsBatteryAlmostARGB">0xFFFFFF00</integer>
+
     <!-- Is the notification LED intrusive? -->
     <bool name="config_intrusiveNotificationLed">true</bool>
 
