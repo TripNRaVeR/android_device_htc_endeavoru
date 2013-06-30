@@ -218,12 +218,6 @@
     <!-- Indicate whether the SD card is accessible without removing the battery. -->
     <bool name="config_batterySdCardAccessibility">false</bool>
 
-    <!-- serial ports available to the serial manager -->
-    <string-array translatable="false" name="config_serialPorts">
-	<item>/dev/ttyACM0</item>
-	<item>/dev/ttyHS2</item>
-    </string-array>
-
     <!-- Disable safe headphone volume -->
     <bool name="config_safe_media_volume_enabled">false</bool>
 
