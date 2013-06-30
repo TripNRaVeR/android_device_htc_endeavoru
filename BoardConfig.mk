@@ -50,10 +50,12 @@ TARGET_TEGRA_VERSION := t30
 # Erratum to avoid the generation of ldrcc instructions
 NEED_WORKAROUND_CORTEX_A9_745320 := true
 
-# Flags
-TARGET_GLOBAL_CFLAGS += -mfpu=neon
-TARGET_GLOBAL_CPPFLAGS += -mfpu=neon
-TARGET_EXTRA_CFLAGS += $(call cc-option, -mtune=cortex-a9 -mcpu=cortex-a9 -march=armv7-a-neon -mfpu=neon)
+# Optimization Flags
+TARGET_GLOBAL_CFLAGS += -mtune=cortex-a9 -mcpu=cortex-a9 -mfpu=neon
+TARGET_GLOBAL_CFLAGS += -fpic -fno-short-enums -pipe -funsafe-math-optimizations -ffinite-math-only
+TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a9 -mcpu=cortex-a9 -mfpu=neon
+TARGET_GLOBAL_CPPFLAGS += -fpic -fno-short-enums -pipe -funsafe-math-optimizations -ffinite-math-only
+TARGET_EXTRA_CFLAGS += $(call cc-option,  -marm -march=armv7-a)
 
 # Common CFLAGS
 COMMON_GLOBAL_CFLAGS += -DICS_AUDIO_BLOB -DMR0_CAMERA_BLOB -D__ARM_CACHE_LINE_SIZE=32
