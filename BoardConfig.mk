@@ -41,6 +41,7 @@ ARCH_ARM_HAVE_TLS_REGISTER := true
 
 # Architecture - Tegra
 TARGET_BOARD_PLATFORM := tegra
+TARGET_BOARD_PLATFORM_GPU := tegra
 TARGET_TEGRA_VERSION := t30
 
 # Erratum to avoid the generation of ldrcc instructions
