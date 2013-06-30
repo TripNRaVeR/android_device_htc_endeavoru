@@ -21,6 +21,9 @@ BOARD_SKIP_ANDROID_DOC_BUILD := true
 # inherit from the proprietary version
 -include vendor/htc/endeavoru/BoardConfigVendor.mk
 
+# Include path
+TARGET_SPECIFIC_HEADER_PATH := device/htc/endeavoru/include
+
 # Bootloader
 TARGET_NO_RADIOIMAGE := true
 TARGET_NO_BOOTLOADER := true
